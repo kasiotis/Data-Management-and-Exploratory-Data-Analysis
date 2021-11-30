@@ -13,24 +13,82 @@ knitr::opts_knit$set(root.dir= normalizePath('..'))
 ```{r ProjectTemplate, include=FALSE}
 library(ProjectTemplate)
 load.project()
+
 ```
 
-## R Markdown
+# Business Understanding
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## Determine Business Objectives
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+### Background
 
-```{r cars}
-summary(cars)
-```
+This project concerns an online course. As part of this project, we seek to carry out learning analytics to measure and analyse the data that regularly get collected about the learners of this course. The purpose of this analysis is to understand and optimize learning and the environment in which it occurs.
 
-## Including Plots
+### Business Objectives
 
-You can also embed plots, for example:
+1. Investigation into how the students engaged with the course. Which variables were responsible for their engagement with the course (resources used, steps completed, videos watched, etc.)? Looking at the changes that could be made (what worked well, what didn't). This could help improve the curriculum design.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+2. Investigation into student performance. Understand which variables may have influenced their performance and progress (step quiz, grades, background characteristics, etc.). This could help better inform how to better support students.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+3. Investigation into student background. Understand the target audience of the learners that participate in this course and identify the characteristics of those that were successful and those that were not.
+
+## Assess Situation
+
+### Resources
+
+The resources that were provided for this project are a series of recorded log data (enrollments, arch-type survey responses, leaving survey response, weekly sentiment survey, team members, Quiz performance, step attendance, video coverage) for 7 different runs. In total, that is eight distinct data sources that could be used to draw inferences from regarding the business objectives.
+
+### Requirements
+
+The main requirement is to use some or all of the provided sets of data to create a data analysis pipeline for a set of reliable, quick and reproducible set of tools that will be used to derive information regarding my business questions.
+
+### Assumptions and constraints
+
+Multiple assumptions will have to be made as part of this project in terms of indicating the business objectives. Since I am not in contact with the company to discuss the aims and goals of the analysis with these data sets, I will have to determine some business objectives which I deem important and useful to investigate within the data sets.
+
+The constraints face by the exploratory analysis are multiple. Firstly, the eight aforementioned data sources were not recorded for every run, in some runs only a small number of sources were recorded which limits our ability to effectively compare these runs in term of each source of recorded data. Another constraint is various data sets, there are entries with missing values for various variables. This is a problem because it means that the samples, we can extract for some variables are not really representative of the whole dataset.
+
+
+## Determine data mining goals
+
+### Goals
+
+1. Learner Background:
+- Finding the educational background and personal characteristics of the learners
+- Finding if and how their background and characteristics affected their learning 
+
+2. Learner Engagement:
+- Finding methods to quantify the engagement of the students with the course.
+- Finding where their engagement was attributed
+
+3. Learner Performance:
+- Finding how the students performed in this course
+- Finding where their performance was attributed
+
+### Success Criteria
+
+The successfulness of my data mining project is dependent on the a variety of criteria, such as:
+
+1. Having structured and clear business goals for what it is that I am trying to achieve from my data mining process.
+2. Further dividing the business drivers down to straightforward hypotheses that can be addressed directly.
+3. Thorough questioning of the reliability, completeness and relevance of the data sources used to avoid producing biased, unreliable or unimportant results.
+
+## Project Plan
+
+### Plan
+
+My plan for this project is going to be based around the steps that formulate the CRISP-DM methodology. To begin with, I will look at all eight data sources methodically to try and understand what it is that lays within each set and how it can be used. I will discuss how the data composition and how the methods that they can be manipulated to best extract answers for my data mining goals. Furthermore, I look for issues with the data that need cleaning and reformatting, this will be done to verify its quality before moving on to the next steps. From there on, I will commence by picking out the data that is relevant to my data mining goals and work exclusively with that. I will clean that data, construct new records of it, merge it with other pre-existing data and reformat it wherever necessary so that it is ready for use by the models I am going to build. The next step is to take advantage for these newly prepared data sources to help me build my suite of reproducible models for analysis regarding the data mining goals.
+
+### Assessment of tools and techniques
+
+I am going to be using multiple tools for this project. 
+
+1. Firstly, I will be using the ProjectTemplate library which allows me to automate multiple parts of the data analysis process such as organizing files, loading packages and data sets into memory and munging and preprocessing my data is a form that renders them ready for analysis([\textcolor{blue}{Git, N/A}](http://projecttemplate.net/getting_started.html)).
+2. Another tool that I am going to making use of is Git version control that allows me to save copies of my work in progress in case I need to go back to specific point of my work ([\textcolor{blue}{ProjectTemplate, N/A}](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control)).
+3. Next tool I am going to be using is the dplyr package as this is a tool that is very commonly used for data manipulation and analysis ([\textcolor{blue}{Zev, 2014}](http://zevross.com/blog/2014/03/26/four-reasons-why-you-should-check-out-the-r-package-dplyr-3/)). 
+4. Lastly the visualization package called ggplot2 will be used to create plots at a high level of abstraction ([\textcolor{blue}{Tidyverse, N/A}](https://ggplot2.tidyverse.org/)).
+
+
+
+
+
