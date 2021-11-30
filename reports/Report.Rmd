@@ -88,7 +88,231 @@ I am going to be using multiple tools for this project.
 3. Next tool I am going to be using is the dplyr package as this is a tool that is very commonly used for data manipulation and analysis ([\textcolor{blue}{Zev, 2014}](http://zevross.com/blog/2014/03/26/four-reasons-why-you-should-check-out-the-r-package-dplyr-3/)). 
 4. Lastly the visualization package called ggplot2 will be used to create plots at a high level of abstraction ([\textcolor{blue}{Tidyverse, N/A}](https://ggplot2.tidyverse.org/)).
 
+---
 
+# Data Understanding
+
+## Introduction
+
+This section seeks to describe the data that have been provided to me for this analysis as part of this project. This process will include describing, exploring and verifying the quality of each data set individually.
+
+## Initial Data Collection
+
+The data was initially stored in a zip folder. This folder includes eight distinct data sets that each recorded an aspects of the course and/or the learner's interaction with the course. Additionally, we observe an number of repetitions in some of these data sets which represent different runs of this course. In total there are seven runs. In runs three to seven we see that all types of data sets are apparent. While on the other, in run one only six are present, with sets labeled as "team-members" and "video-stats" are missing. Moreover, in run two we see that only seven are present, with the set labeled as "video-stats" is missing again.
+
+
+## Enrolments Dataset
+
+This data set has been recorded for all seven runs
+
+### Describe Data
+
+Enrolments is a data set that holds information about multiple characteristics of the learner such the time they enrolled in the course, the time they finished it, their previous education and much more.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_enrolments, strict.width = "wrap", vec.len=2)
+```
+One thing that we can immediately see is that there are 13 columns in this set, all of which are of class character. Additionally, there are 2342 rows in this run which indicates that this many students enrolled in this course. By looking at the information held in this data set I believe that I could use it to extract some insights that would help me address my data mining goals. The kinds of questions that I could answer include:
+
+Learner Background:
+
+- Number of people enrolled categorized by age, gender, education, country, employment.
+
+Learner Performance:
+
+- Percentage of people who completed the course
+
+### Verify Data Quality
+
+In this data set we see that some columns have a lot of empty cells or cells that are labeled as unknown or with "--". This may cause some issues later on when we are processing the data and should be taken into consideration.
+
+
+## Leaving survey response Dataset
+
+This data set has been recorded for all seven runs
+
+### Describe Data
+
+This data set is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_leaving.survey.responses, strict.width = "wrap", vec.len=2)
+```
+In the snippet above we can see that eight metrics were recorded for this data set, four of which are of class character and the other four are Integer. In terms of my data mining goals, this set can help me extract some useful information, such as:
+
+Engagement:
+
+-	Percentages of the leaving reasons.
+-	Further investigate the trends among steps (if relevant to the course) at which they left.
+
+### Verify Data Quality
+
+The data set has a many NA values in last four columns. Additionally, we can also see that the column "leaving_reason" has some written errors.
+
+
+## Weekly sentiment survey Dataset
+
+This data set has been recorded for all seven runs
+
+### Describe Data
+
+This data set hold information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_weekly.sentiment.survey.responses, strict.width = "wrap", vec.len=2)
+```
+In the snippet above we can see the five metrics that were recorded in total. The columns "id", "week_number" and "rating" are integers, while the other two are characters. I can clearly see that this data set can help my analysis in term of understanding learner engagement. The question that can be asked about this data is:
+
+Learner Engagement:
+
+- How well was each week received by the learners?
+
+### Verify Data Quality
+
+The quality of this data set seems to be fine. The only thing that may be a problem is that not all students have given a reason for their rating. However this is something that can be bypassed if we simply ignore that "reason" column.
+
+## Question response Dataset
+
+This data set has been recorded for all seven runs
+
+### Describe Data
+
+This data set includes information about quizzes that were taken by the students.  
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_question.response, strict.width = "wrap", vec.len=2)
+```
+In total we see that there are ten columns in this set. There are many interesting metrics being recorded in this set such as the type of the question, the week it was about, the step number that the quiz held as part of the curriculum, the time of submission and lastly whether or not the answer give by the student was the correct one or not. In regards to my data mining goals, this data set is very useful as it can provide my analysis with a lot of insight. The information that can be extracted includes:
+
+Learner Performance:
+
+-	Success rate for every quiz.
+-	Success rate based on the week.
+-	Percentage of failing responses in a question from the worst performing quiz.
+
+### Verify Data Quality
+
+The only issue with that can be immediately spotted with this data set is that the column "cloze_response" is almost completely empty.
+
+## Step activity Dataset
+
+This data set has been recorded for all seven runs
+
+### Describe Data
+
+This data set is holding information about the curriculum of each week.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_step.activity, strict.width = "wrap", vec.len=2)
+```
+The are six metrics being recorded in this set, of which the two are integers, the other three are characters and there is also one that is a numeric. In this data set I see that there is a great amount of information that can be extracted and used to help me inform my data mining goals. Some of the questions that can be answered include:
+
+Learner Engagement:
+
+-	Time it took each student to complete each week
+-	Percentage of learners that completed every step
+-	Percentage of learners that completed each week
+-	Completion ratio for each step
+
+### Verify Data Quality
+
+Overall the data set looks to be of good quality. However, I have spotted that the "step" column seems a little bit problematic, so lets investigate a bit further.
+```{r}
+#plotting the step (which consists of week number followed by a dot and then the step number)
+#against the actual recorded step number to see if the data is correct
+plot(cyber.security.7_step.activity$step_number,cyber.security.7_step.activity$step, xlab = "Step number", ylab = "Step column")
+```
+By looking at the plot above we clearly see that the step numbers are not correctly recorded in the "step" column.
+
+## Video stats Dataset
+
+This data set has only been recorded for runs three to seven.
+
+### Describe Data
+
+This is a data set that holds statistical metrics about the video material coverage of the learners.
+ 
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_video.stats, strict.width = "wrap", vec.len=2)
+```
+In this set we have twenty-eight metrics being recorded in total. Most of these metrics are pre-calculated percentage statistics and are classed are numerical values. While there are also six integer classes that represent amounts of learners. Lastly, there is also one character column for the title of the video. The statistics show us many things such as the percentage of people that watched a certain amount of each video, the countries they watched from and some options they used while watching such as subtitles, hd video quality, etc. This data set can be exploited to answer the following questions:
+
+Engagement
+
+-	Percentage of video watched according to their duration.
+Target Audience
+-	Percentage of viewers that used mobile, desktop, tv, tablet.
+-	Percentage of viewers from each continent.
+
+### Verify Data Quality
+
+This appears to be okay. There are however a few things we may assume about it. First is the duration watched by learners for each video cannot account for people that downloaded that video since however much they watched, they did offline. Second assumption is videos with high percentage of watching are those with at least 95%. The reason behind this is that people may pause and close the video just a few seconds before it ends if there is nothing more to watch.
+
+## archtype survey responses
+
+This data set was recorded for all seven runs.
+
+### Describe Data
+
+This set holds the responses of the learners about how they view themselves in regards to what archetype the feel like.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_archetype.survey.responses, strict.width = "wrap", vec.len=2)
+```
+There are four columns in this set, threes character and one integer. There seems to be nothing valuable in this set that would help in my analysis.
+
+### Verify Data Quality
+
+The data held in this set seems fine. Only thing to add is that it is empty in runs one and two.
+
+## Team members Dataset
+
+This data set has been recorded for runs two to seven.
+
+### Describe Data
+
+The data stored in this set describe how the staff member teams were set up for the course.
+
+### Explore Data
+
+To further explore the contents of this data set we can see below a few rows with their respective column names.
+
+```{r}
+str(cyber.security.7_team.members, strict.width = "wrap", vec.len=2)
+```
+There are five columns in total that describe the roles of the team members and their personal information. This set also seems like it cannot help me very much in my analysis.
+
+### Verify Data Quality
+
+The personally identifiable pieces of information have been retracted from this data set. Other than that the structural integrity of the data seems alright.
 
 
 
