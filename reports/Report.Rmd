@@ -204,7 +204,7 @@ Learner Performance:
 
 -	Success rate for every quiz.
 -	Success rate based on the week.
--	Percentage of failing responses in a question from the worst performing quiz.
+- Success rate based on the number of questions
 
 ### Verify Data Quality
 
@@ -230,8 +230,9 @@ The are six metrics being recorded in this set, of which the two are integers, t
 Learner Engagement:
 
 -	Time it took each student to complete each week
--	Percentage of learners that completed every step
+-	Percentage of learners that completed each step
 -	Percentage of learners that completed each week
+- Percentage of learners that completed each type of learning material
 
 ### Verify Data Quality
 
@@ -263,7 +264,9 @@ In this set we have twenty-eight metrics being recorded in total. Most of these 
 Engagement
 
 -	Percentage of video watched according to their duration.
+
 Target Audience
+
 -	Percentage of viewers that used mobile, desktop, tv, tablet.
 -	Percentage of viewers from each continent.
 
@@ -328,3 +331,7 @@ The data sources that I am going to include are the ones that can provide me wit
 For this dataset I have created six new types of data sets that hold information about the enrollments and graduations separated by the age, gender, education, employment, country and a general one that included all people. To create this six types of data sets, I have created six functions that take in a specific run's dataset and return a new one for the type of information I need. I have called each of these six functions seven times so that all of the necessary data (new data sets) for all seven runs is automatically created in the munge file for enrollments.
 The process of creating the functions for new data sets mainly involved separating the rows and columns of the original data according to the needs of my data mining goals and extracting and calculating only what was deemed useful. However, a big part of the dataset was taken advantage of and only a small amount of information was excluded such as the columns for purchase of statement and the country.
 
+### Question Response Dataset
+
+For question response I created one function in the munge that takes in a data set and carries out all of the necessary preprocessing and clean automatically to return a new clear and concise data set that includes all of the needed data for answering my data mining questions.
+I called this function seven times in the munge file, one for each run and produced seven new data sets that are ready for analysis.
