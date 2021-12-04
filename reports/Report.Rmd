@@ -339,3 +339,7 @@ The function takes care of a variety of things that are required to extract the 
 ### Weekly sentiment survey Dataset
 
 For the weekly sentiment dataset I decided to create a function that creates a plot. This function only takes into consideration the qualitative data that the users gave in their survey as a reason for their rating. Essentially the function takes in a vector of character responses, cleans them by getting rid of all the stopwords that are very common and meaningless and then sorts the remaining words according to their frequency. The plot that it returns is a "wordcloud" with the most frequent words in the center with a larger font and the rest of the words around them with a smaller font and placed outwards in the plot according to their frequency levels. This function allows me to then compare the sentiment of the learners across runs.
+
+### Video stats Dataset
+
+This particular data set is actually ready for analysis as it is. It does not require any cleaning or preprocessing in order to answer the data mining goals set out earlier. It already has pre-calculated values for the percentages of everything I want to investigate.
