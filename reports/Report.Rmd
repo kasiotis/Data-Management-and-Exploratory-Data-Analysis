@@ -232,7 +232,6 @@ Learner Engagement:
 -	Time it took each student to complete each week
 -	Percentage of learners that completed every step
 -	Percentage of learners that completed each week
--	Completion ratio for each step
 
 ### Verify Data Quality
 
@@ -314,5 +313,18 @@ There are five columns in total that describe the roles of the team members and 
 
 The personally identifiable pieces of information have been retracted from this data set. Other than that the structural integrity of the data seems alright.
 
+---
 
+# Data Preparation
+
+## Data Selection
+
+The data sources that I am going to include are the ones that can provide me with the most relevant and useful information regarding my business objectives. To extract that information I am going to have to work with a variety of data sources. The data sources which I have found to be the most relevant for informing the engagement, performance and background of the learners are the data sets of enrollments, leaving survey response, weekly sentiment survey, quiz performance, step attendance, video coverage. The only ones that I am going to exclude are the archtype survey responses and team members as they do not hold any data that would help me address my business goals.
+
+## Data preprocessiong and cleaning
+
+### Enrolments Dataset
+
+For this dataset I have created six new types of data sets that hold information about the enrollments and graduations separated by the age, gender, education, employment, country and a general one that included all people. To create this six types of data sets, I have created six functions that take in a specific run's dataset and return a new one for the type of information I need. I have called each of these six functions seven times so that all of the necessary data (new data sets) for all seven runs is automatically created in the munge file for enrollments.
+The process of creating the functions for new data sets mainly involved separating the rows and columns of the original data according to the needs of my data mining goals and extracting and calculating only what was deemed useful. However, a big part of the dataset was taken advantage of and only a small amount of information was excluded such as the columns for purchase of statement and the country.
 
