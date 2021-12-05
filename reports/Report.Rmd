@@ -229,7 +229,6 @@ The are six metrics being recorded in this set, of which the two are integers, t
 
 Learner Engagement:
 
--	Time it took each student to complete each week
 -	Percentage of learners that completed each step
 -	Percentage of learners that completed each week
 - Percentage of learners that completed each type of learning material
@@ -342,4 +341,9 @@ For the weekly sentiment dataset I decided to create a function that creates a p
 
 ### Video stats Dataset
 
-This particular data set is actually ready for analysis as it is. It does not require any cleaning or preprocessing in order to answer the data mining goals set out earlier. It already has pre-calculated values for the percentages of everything I want to investigate.
+This particular data set is actually ready for analysis as it is. It does not require any further cleaning or preprocessing in order to answer the data mining goals set out earlier. It already has pre-calculated values for the percentages for all aspects of the variables I want to investigate.
+
+### Step Activity Dataset
+
+As we saw in the previous chapter in the section of Verifying data quality, this particular data set had an issue with the column labeled as "step". To solve this issue in a reproducible and clean way I created a function that takes in a data set, modifies the step column and return a new clean dataset. The modification is essentially a re-calculation of the step column but this time the weeks are represented by the hundreds and the steps by the rest of the number.
+To prepare my data for the analyis I want to do, I created another function for this data set that again takes in a step.activity set and returns a new more concise and processed data frame. This data frame consists of all steps, the number of learner that started each step and the number that finished it, their completion percentage, and lastly the time it took them on average to complete each step. The returned data frame provides me with all of the information I need for my analysis in order to answer my data mining questions. To make things even easier, I called both functions together for all seven runs, to clean and preprocess my data so that it is ready for when I start my analysis.
