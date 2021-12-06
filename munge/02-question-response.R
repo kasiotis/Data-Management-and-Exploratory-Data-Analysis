@@ -48,7 +48,8 @@ get.quiz.data = function(question.response.dataset) {
     answers_given = quiz.answers.given$Freq,
     answers_correct = quiz.correct.answers$Freq,
     success_percentage = quiz.success.percentage,
-    number_of_questions = num.of.questions)
+    number_of_questions = num.of.questions
+    )
   
   return(finalset[order(finalset$quiz),])
 }
