@@ -28,31 +28,42 @@ age.grad.allruns.plot = ggplot(grad.age.data.1, aes(x = age.range, y = graduate.
   labs(title = "Graduation percentage of each run for all age ranges",
        x = "Age ranges", y = "Graduation Percentage") 
 
-#creating a data frame with the graduation percentage for all the runs
-all.grad.age.runs = data.frame(
-  age.range = grad.age.data.1$age.range,
-  percent1 = grad.age.data.1$graduate.percentage,
-  percent2 = grad.age.data.2$graduate.percentage,
-  percent3 = grad.age.data.3$graduate.percentage,
-  percent4 = grad.age.data.4$graduate.percentage,
-  percent5 = grad.age.data.5$graduate.percentage,
-  percent6 = grad.age.data.6$graduate.percentage,
-  percent7 = grad.age.data.7$graduate.percentage
-  )
+#merging all the age data that I have for all runs
+allages = merge(merge(merge(merge(merge(merge(
+  grad.age.data.1,
+  grad.age.data.2, all=TRUE),
+  grad.age.data.3, all=TRUE),
+  grad.age.data.4, all=TRUE),
+  grad.age.data.5, all=TRUE),
+  grad.age.data.6, all=TRUE),
+  grad.age.data.7, all=TRUE)
 
-average.age.percent.allruns = 1:8
+#getting the unique names of the age ranges from my new set
+age.names = unique(allages$age.range)
 
-#finding the average graduation percentage of all runs for each age range
-for (i in 1:8) {
-average.age.percent.allruns[i] = sum(all.grad.age.runs[i,2:8])/7
+#initializing vectors that will hold the numbers of enrollments and graduations of each country
+all.age.enrollments = 1:length(age.names)
+all.age.graduations = 1:length(age.names)
+
+#extracting the enrollments and graduations of each country from all runs
+for (i in 1:length(age.names)) {
+  all.age.enrollments[i] = sum(allages$enrollements[allages$age.range == age.names[i]])
+  all.age.graduations[i] = sum(allages$graduates[allages$age.range == age.names[i]])
 }
 
-#making the calculated percentages into a data frame
-allruns.age.grad = data.frame(age.range = grad.age.data.1$age.range,
-                             graduate.percentage = average.age.percent.allruns)
+#recalculating the the graduate percentage of each country by merging the findings of all runs
+grad.age.data.merged = data.frame(
+  age = unique(allages$age.range),
+  grad.percent = all.age.graduations/all.age.enrollments*100
+)
 
-age.grad.average.plot = ggplot(allruns.age.grad, aes(x = age.range, y = graduate.percentage))+
-  geom_line(aes(group = 1), color=7)
+#plotting all the countries of origin of the learners against their respective graduate percentage
+(age.grad.average.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
+    geom_line(aes(group = 1), color=7))
+
+
+
+
 
 
 
