@@ -103,11 +103,9 @@ The data was initially stored in a zip folder. This folder includes eight distin
 
 ## Enrolments Dataset
 
-This data set has been recorded for all seven runs
-
 ### Describe Data
 
-Enrolments is a data set that holds information about multiple characteristics of the learner such the time they enrolled in the course, the time they finished it, their previous education and much more.
+This data set has been recorded for all seven runs and it is a data set that holds information about multiple characteristics of the learner such the time they enrolled in the course, the time they finished it, their previous education and much more.
 
 ### Explore Data
 
@@ -133,11 +131,9 @@ In this data set we see that some columns have a lot of empty cells or cells tha
 
 ## Leaving survey response Dataset
 
-This data set has been recorded for all seven runs
-
 ### Describe Data
 
-This data set is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning.
+This data set has been recorded for all seven runs and is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning.
 
 ### Explore Data
 
@@ -160,11 +156,9 @@ The data set has a many NA values in last four columns. Additionally, we can als
 
 ## Weekly sentiment survey Dataset
 
-This data set has been recorded for all seven runs
-
 ### Describe Data
 
-This data set hold information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
+This data set has been recorded for all seven runs and it hold information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
 
 ### Explore Data
 
@@ -185,11 +179,9 @@ The quality of this data set seems to be fine. The only thing that may be a prob
 
 ## Question response Dataset
 
-This data set has been recorded for all seven runs
-
 ### Describe Data
 
-This data set includes information about quizzes that were taken by the students.  
+This data set has been recorded for all seven runs and it includes information about quizzes that were taken by the students.  
 
 ### Explore Data
 
@@ -212,11 +204,9 @@ The only issue with that can be immediately spotted with this data set is that t
 
 ## Step activity Dataset
 
-This data set has been recorded for all seven runs
-
 ### Describe Data
 
-This data set is holding information about the curriculum of each week.
+This data set has been recorded for all seven runs and is holding information about the curriculum of each week.
 
 ### Explore Data
 
@@ -245,11 +235,9 @@ By looking at the plot above we clearly see that the step numbers are not correc
 
 ## Video stats Dataset
 
-This data set has only been recorded for runs three to seven.
-
 ### Describe Data
 
-This is a data set that holds statistical metrics about the video material coverage of the learners.
+This data set has only been recorded for runs three to seven and it holds statistical metrics about the video material coverage of the learners.
  
 ### Explore Data
 
@@ -275,11 +263,9 @@ This appears to be okay. There are however a few things we may assume about it. 
 
 ## archtype survey responses
 
-This data set was recorded for all seven runs.
-
 ### Describe Data
 
-This set holds the responses of the learners about how they view themselves in regards to what archetype the feel like.
+This data set was recorded for all seven runs and it holds the responses of the learners about how they view themselves in regards to what archetype the feel like.
 
 ### Explore Data
 
@@ -296,11 +282,9 @@ The data held in this set seems fine. Only thing to add is that it is empty in r
 
 ## Team members Dataset
 
-This data set has been recorded for runs two to seven.
-
 ### Describe Data
 
-The data stored in this set describe how the staff member teams were set up for the course.
+This data set has been recorded for runs two to seven. The data stored in this set describe how the staff member teams were set up for the course.
 
 ### Explore Data
 
@@ -333,7 +317,7 @@ The process of creating the functions for new data sets mainly involved separati
 ### Question Response Dataset
 
 For question response I created one function in the munge that takes in a data set and carries out all of the necessary preprocessing and clean automatically to return a new clear and concise data set that includes all of the needed data for answering my data mining questions. I called this function seven times in the munge file, one for each run and produced seven new data sets that are ready for analysis.
-The function takes care of a variety of things that are required to extract the appropriate information from the original data set. Firstly it creates two separate data frames for the numbers of answers given and the number of answers that were correct along with their respective week and step number. From these two data frames it then creates another data frame of the correct answer percentages for each step and week. Next I iterate through all of the found unique steps (quizzed) and find and store in a vector how many questions there were in each one of those quizzes. Another thing that it takes care of is the issue of the wrongful step values which need to be reformatted. To reformat the step numbers, I multiply the weeks by a hundred and add the the step numbers. Lastly, I return a newly created data frame consisting of all the vectors that are needed from my previously created vectors and data frames.
+The function takes care of a variety of things that are required to extract the appropriate information from the original data set. Firstly it creates two separate data frames for the numbers of answers given and the number of answers that were correct along with their respective week and step number. From these two data frames it then creates another data frame of the correct answer percentages for each step and week. Next I iterate through all of the found unique steps (quizzes) and find and store in a vector how many questions there were in each one of those quizzes. Another thing that it takes care of is the issue of the wrongful step values which need to be reformatted. To reformat the step numbers, I multiply the weeks by a hundred and add the the step numbers. Lastly, I return a newly created data frame consisting of all the vectors that are needed from my previously created vectors and data frames.
 
 ### Weekly sentiment survey Dataset
 
@@ -352,3 +336,8 @@ To prepare my data for the analyis I want to do, I created another function for 
 
 This dataset was in need of some clean before I could extract any data from it. To clean it I had to reformat and recalculate the "leaving_step" column just as before; by representing the weeks with the hundreds and the step number with the rest of the value. This was achieved by creating a function that took in a leaving survey responses data set and return a clean one with the aforementioned changes. The was one more issues with this dataset that I had to clean, that is the "leaving_reason" column which has some typos in a few of the reasons given. To fix this issues, I tried finding each one of these problematic reasons and changing their values to the proper piece of text. However, because the typos are not of UTF-8 type, the R language could not understand them and therefore I could not select them in order to change them. Therefore, to bypass this issue, I added another line of code in my cleaning method where I used the "stri_enc_toutf8" function that replaces non-UTF-8 characters with the "REPLACEMENT CHARACTER". I then when and replaced all my faulty reasons with their now searchable "REPLACEMENT CHARACTERS" for all their non_UTF-8 values and turned them into the correct piece of text for the leaving reasons.
 To preprocess my information in order to create new data, I created two functions in total. The first function takes in a leaving survey response data set and finds and returns the number of people that left at each step. The second function again takes in the same type of data set and returns the number of times each leaving reason was given by the learners.
+
+---
+
+# Data Analysis
+

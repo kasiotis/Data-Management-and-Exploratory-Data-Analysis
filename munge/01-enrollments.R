@@ -125,14 +125,17 @@ get.graduate.age.data = function(enrolments.dataset){
   both.data.frames = merge(ages.enrolled, ages.graduates, by.x = "Var1", by.y = "Var1", all.x = TRUE)
   both.data.frames[is.na(both.data.frames)] = 0
   
-  return(
-    data.frame(
-      age.range = both.data.frames$Var1,
-      enrollements = both.data.frames$Freq.x,
-      graduates = both.data.frames$Freq.y,
-      graduate.percentage = both.data.frames$Freq.y/both.data.frames$Freq.x*100
+  both.data.frames$Var1 = both.data.frames$Var1 <- factor(both.data.frames$Var1, levels = c("<18", "18-25", "26-35", "36-45", "46-55", "56-65", ">65", "Unknown"), ordered = TRUE)
+  
+  #creating a data frame with all of the newly created information
+  result = data.frame(
+    age.range = both.data.frames$Var1,
+    enrollements = both.data.frames$Freq.x,
+    graduates = both.data.frames$Freq.y,
+    graduate.percentage = both.data.frames$Freq.y/both.data.frames$Freq.x*100
     )
-  )
+  #returning the newly created data frame ordered by the age.range
+  return(result[order(result$age.range),])
 }
 
 
