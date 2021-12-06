@@ -43,15 +43,14 @@ get.quiz.data = function(question.response.dataset) {
   quiz.step = as.numeric(as.character(quiz.answers.given$Var1))*100+as.numeric(as.character(quiz.answers.given$Var2))
   
   #returning a newly created data frame of all the extracted values that will help me address my business goals
-  return(
-    data.frame(
-      quiz=quiz.step,
-      answers_given = quiz.answers.given$Freq,
-      answers_correct = quiz.correct.answers$Freq,
-      success_percentage = quiz.success.percentage,
-      number_of_questions = num.of.questions)
-    )
+  finalset = data.frame(
+    quiz=quiz.step,
+    answers_given = quiz.answers.given$Freq,
+    answers_correct = quiz.correct.answers$Freq,
+    success_percentage = quiz.success.percentage,
+    number_of_questions = num.of.questions)
   
+  return(finalset[order(finalset$quiz),])
 }
 
 #calling "get.quiz.data" function for run 1

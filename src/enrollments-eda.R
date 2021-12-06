@@ -28,7 +28,7 @@ age.grad.allruns.plot = ggplot(grad.age.data.1, aes(x = age.range, y = graduate.
   labs(title = "Graduation percentage of each run for all age ranges",
        x = "Age ranges", y = "Graduation Percentage") 
 
-#merging all the age data that I have for all runs
+#merging all the age data sets that I have created for all runs
 allages = merge(merge(merge(merge(merge(merge(
   grad.age.data.1,
   grad.age.data.2, all=TRUE),
@@ -60,10 +60,6 @@ grad.age.data.merged = data.frame(
 #plotting all the countries of origin of the learners against their respective graduate percentage
 (age.grad.average.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
-
-
-
-
 
 
 
@@ -103,7 +99,7 @@ grad.country.data.merged = data.frame(
 
 #plotting all the countries of origin of the learners against their respective graduate percentage
 #but only displaying the countries where the graduation percentage was greater than or equal to 20%
-(country.grad.average.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=20,], aes(x = country, y = grad.percent))+
+(country.grad.average.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+
   geom_line(aes(group = 1), color=7))
 
 

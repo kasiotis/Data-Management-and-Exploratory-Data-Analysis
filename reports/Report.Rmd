@@ -307,7 +307,7 @@ The personally identifiable pieces of information have been retracted from this 
 
 The data sources that I am going to include are the ones that can provide me with the most relevant and useful information regarding my business objectives. To extract that information I am going to have to work with a variety of data sources. The data sources which I have found to be the most relevant for informing the engagement, performance and background of the learners are the data sets of enrollments, leaving survey response, weekly sentiment survey, quiz performance, step attendance, video coverage. The only ones that I am going to exclude are the archtype survey responses and team members as they do not hold any data that would help me address my business goals.
 
-## Data preprocessiong and cleaning
+## Data preprocessing, cleaning, merging and constructing
 
 ### Enrolments Dataset
 
