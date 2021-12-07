@@ -1,4 +1,6 @@
-################################################## Cleaning the Data set ########################################################
+#############################################################################################################################################
+######################################################### Cleaning the Data set #############################################################
+#############################################################################################################################################
 
 #changing the step column so that it represents the step by multiplying the the week by 100 and adding the step number
 clean.step.activity = function(step.activity.dataset){
@@ -8,7 +10,11 @@ clean.step.activity = function(step.activity.dataset){
 }
 
 
-############################################ Getting participation&completion data for each step ##################################################
+
+#############################################################################################################################################
+########################################### Getting participation&completion data for each step #############################################
+#############################################################################################################################################
+
 
 #Function that takes in a step.activity data set and extracts the step data about the number of learner that started and finished each step, their
 #completion percentage, and lastly the time it took them on average to complete that step.
@@ -77,4 +83,49 @@ step.success.data.4 = get.step.participants(clean.step.activity(cyber.security.4
 step.success.data.5 = get.step.participants(clean.step.activity(cyber.security.5_step.activity),5)
 step.success.data.6 = get.step.participants(clean.step.activity(cyber.security.6_step.activity),6)
 step.success.data.7 = get.step.participants(clean.step.activity(cyber.security.7_step.activity),7)
+
+
+
+#############################################################################################################################################
+################################################# Doing data combining and data merging  ####################################################
+#############################################################################################################################################
+
+get.merged.step.succes.data = function(allsteps){
+  
+  #getting the unique names of the steps from my new set
+  step.names = unique(allsteps$step)
+  
+  #initializing vectors that will hold the numbers of participants, completionists and times taken to complete each step, for each step
+  all.participants.frequencies = 1:length(step.names)
+  all.completionists.frequencies = 1:length(step.names)
+  all.times.frequencies = 1:length(step.names)
+  
+  #extracting the numbers of participants, completionists and times taken to complete each step, for each step
+  for (i in 1:length(step.names)) {
+    all.participants.frequencies[i] = mean(allsteps$step.participants[allsteps$step == step.names[i]])
+    all.completionists.frequencies[i] = mean(allsteps$step.completionists[allsteps$step == step.names[i]])
+    all.times.frequencies[i] = mean(allsteps$time.to.complete.in.minutes[allsteps$step == step.names[i]])
+  }
+  
+  return(data.frame(
+    step = step.names,
+    step.participants = all.participants.frequencies,
+    step.completionists = all.completionists.frequencies,
+    step.complete.percent = all.completionists.frequencies/all.participants.frequencies*100,
+    time.to.complete.in.minutes = all.times.frequencies
+  )
+  )
+}
+
+#merging my step.success datasets into on dataframe
+step.success.data.allruns = merge(merge(merge(merge(
+  step.success.data.3,
+  step.success.data.4, all=TRUE),
+  step.success.data.5, all=TRUE),
+  step.success.data.6, all=TRUE),
+  step.success.data.7, all=TRUE)
+
+
+#reconstructing a merged data frame out of the combined runs
+step.success.data.merged = get.merged.step.succes.data(step.success.data.allruns)
 

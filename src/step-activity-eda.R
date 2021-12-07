@@ -4,40 +4,6 @@ library(dplyr)
 
 load.project()
 
-#merging my step.success datasets into on dataframe
-allsteps = merge(merge(merge(merge(
-  step.success.data.3,
-  step.success.data.4, all=TRUE),
-  step.success.data.5, all=TRUE),
-  step.success.data.6, all=TRUE),
-  step.success.data.7, all=TRUE)
-
-
-#getting the unique names of the steps from my new set
-step.names = unique(allsteps$step)
-
-#initializing vectors that will hold the numbers of participants, completionists and times taken to complete each step, for each step
-all.participants.frequencies = 1:length(step.names)
-all.completionists.frequencies = 1:length(step.names)
-all.times.frequencies = 1:length(step.names)
-
-#extracting the numbers of participants, completionists and times taken to complete each step, for each step
-for (i in 1:length(step.names)) {
-  all.participants.frequencies[i] = mean(allsteps$step.participants[allsteps$step == step.names[i]])
-  all.completionists.frequencies[i] = mean(allsteps$step.completionists[allsteps$step == step.names[i]])
-  all.times.frequencies[i] = mean(allsteps$time.to.complete.in.minutes[allsteps$step == step.names[i]])
-}
-
-#reconstructing a merged data frame out of the combined runs
-step.success.data.merged = data.frame(
-  step = step.names,
-  step.participants = all.participants.frequencies,
-  step.completionists = all.completionists.frequencies,
-  step.complete.percent = all.completionists.frequencies/all.participants.frequencies*100,
-  time.to.complete.in.minutes = all.times.frequencies
-)
-
-
 
 ##############################################################################################################################################
 ############################  Checking the statistics about the steps and how learners engaged with them   ###################################
