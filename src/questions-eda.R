@@ -14,5 +14,5 @@ barplot(quiz.data.7$success_percentage, axisnames = TRUE, names.arg = quiz.data.
 #the success percentage seems to be approximately the same between the quizzes in all runs 
 
 #checking the correlation of the number of questions and the percentage of success
-pairs(quiz.data.1[,4:5])
+plot(quiz.data.1$number_of_questions, quiz.data.1$success_percentage)
 
