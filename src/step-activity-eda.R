@@ -36,7 +36,7 @@ get.step.data.plot = function(step.activity.dataset) {
   
 }
 
-get.step.data.plot(step.success.data.1)
+get.step.data.plot(step.success.data.6)
 get.step.data.plot(step.success.data.2)
 
 #inspecting the relationships of the variables for the steps
