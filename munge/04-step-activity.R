@@ -12,7 +12,7 @@ clean.step.activity = function(step.activity.dataset){
 
 #Function that takes in a step.activity data set and extracts the step data about the number of learner that started and finished each step, their
 #completion percentage, and lastly the time it took them on average to complete that step.
-get.step.participants = function(step.activity.dataset){
+get.step.participants = function(step.activity.dataset, myrun){
   
   #extracting the number of participants in each step
   step.participants = as.data.frame(table(step.activity.dataset$step[step.activity.dataset$first_visited_at!=""]))
@@ -58,6 +58,7 @@ get.step.participants = function(step.activity.dataset){
   #return all of my newly created data in a clean data frame, ready for analysis.
   return(
     data.frame(
+      run = rep(myrun, length(step.participants$Var1)),
       step = step.participants$Var1,
       step.participants = step.participants$Freq,
       step.completionists = step.completionists$Freq,
@@ -69,11 +70,11 @@ get.step.participants = function(step.activity.dataset){
 }
 
 #calling both of my functions 7 times, to clean and preprocess my data sets for all of the runs.
-step.success.data.1 = get.step.participants(clean.step.activity(cyber.security.1_step.activity))
-step.success.data.2 = get.step.participants(clean.step.activity(cyber.security.2_step.activity))
-step.success.data.3 = get.step.participants(clean.step.activity(cyber.security.3_step.activity))
-step.success.data.4 = get.step.participants(clean.step.activity(cyber.security.4_step.activity))
-step.success.data.5 = get.step.participants(clean.step.activity(cyber.security.5_step.activity))
-step.success.data.6 = get.step.participants(clean.step.activity(cyber.security.6_step.activity))
-step.success.data.7 = get.step.participants(clean.step.activity(cyber.security.7_step.activity))
+step.success.data.1 = get.step.participants(clean.step.activity(cyber.security.1_step.activity),1)
+step.success.data.2 = get.step.participants(clean.step.activity(cyber.security.2_step.activity),2)
+step.success.data.3 = get.step.participants(clean.step.activity(cyber.security.3_step.activity),3)
+step.success.data.4 = get.step.participants(clean.step.activity(cyber.security.4_step.activity),4)
+step.success.data.5 = get.step.participants(clean.step.activity(cyber.security.5_step.activity),5)
+step.success.data.6 = get.step.participants(clean.step.activity(cyber.security.6_step.activity),6)
+step.success.data.7 = get.step.participants(clean.step.activity(cyber.security.7_step.activity),7)
 

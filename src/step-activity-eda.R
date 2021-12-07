@@ -4,32 +4,31 @@ library(dplyr)
 
 load.project()
 
-
-allsteps = merge(merge(merge(merge(merge(
-  step.success.data.2,
-  step.success.data.3, all=TRUE),
+#merging my step.success datasets into on dataframe
+allsteps = merge(merge(merge(merge(
+  step.success.data.3,
   step.success.data.4, all=TRUE),
   step.success.data.5, all=TRUE),
   step.success.data.6, all=TRUE),
   step.success.data.7, all=TRUE)
 
 
-#getting the unique names of the age ranges from my new set
+#getting the unique names of the steps from my new set
 step.names = unique(allsteps$step)
 
-#initializing vectors that will hold the numbers of enrollments and graduations of each country
+#initializing vectors that will hold the numbers of participants, completionists and times taken to complete each step, for each step
 all.participants.frequencies = 1:length(step.names)
 all.completionists.frequencies = 1:length(step.names)
 all.times.frequencies = 1:length(step.names)
 
-#extracting the enrollments and graduations of each country from all runs
+#extracting the numbers of participants, completionists and times taken to complete each step, for each step
 for (i in 1:length(step.names)) {
   all.participants.frequencies[i] = mean(allsteps$step.participants[allsteps$step == step.names[i]])
   all.completionists.frequencies[i] = mean(allsteps$step.completionists[allsteps$step == step.names[i]])
   all.times.frequencies[i] = mean(allsteps$time.to.complete.in.minutes[allsteps$step == step.names[i]])
 }
 
-#recalculating the the graduate percentage of each country by merging the findings of all runs
+#reconstructing a merged data frame out of the combined runs
 step.success.data.merged = data.frame(
   step = step.names,
   step.participants = all.participants.frequencies,
@@ -45,7 +44,7 @@ step.success.data.merged = data.frame(
 ##############################################################################################################################################
 
 
-get.step.data.plot = function(step.activity.dataset) {
+get.merged.step.data.plot = function(step.activity.dataset) {
   
   par(mfrow=c(3,1))
   
@@ -75,12 +74,41 @@ get.step.data.plot = function(step.activity.dataset) {
 #1st:   Number of participations against number of completions in each step
 #2nd:   Percentage of Completions out of those that started each step
 #3rd:   Time it took to complete each step on average
-get.step.data.plot(step.success.data.merged)
+get.merged.step.data.plot(step.success.data.merged)
 
-
-
-################################# Further Analysis #############################
 
 #inspecting the relationships of the variables for the steps
-pairs(step.success.data.1)
+pairs(step.success.data.merged)
 
+
+
+########################### Cross-run plots #############################
+
+get.combined.step.data.plot = function(all.step.activity.dataset) {
+  
+  par(mfrow=c(2,1))
+  
+  #plotting the percentage of completion for runs 2 to 7
+  plot(as.numeric(allsteps$step[allsteps$run==3]), allsteps$step.complete.percent[allsteps$run==3],xaxt="n", type = "l", col=3, ylim = c(40,100),
+       xlab = "Steps", ylab = "Percentage of Completion", main = "Percentage of Completions out of those that started each step")
+  lines(as.numeric(allsteps$step[allsteps$run==4]), allsteps$step.complete.percent[allsteps$run==4], type = "l", col=4)
+  lines(as.numeric(allsteps$step[allsteps$run==5]), allsteps$step.complete.percent[allsteps$run==5], type = "l", col=5)
+  lines(as.numeric(allsteps$step[allsteps$run==6]), allsteps$step.complete.percent[allsteps$run==6], type = "l", col=6)
+  lines(as.numeric(allsteps$step[allsteps$run==7]), allsteps$step.complete.percent[allsteps$run==7], type = "l", col=7)
+  axis(1, at=1:length(allsteps$step[allsteps$run==3]), labels = allsteps$step[allsteps$run==3], cex.axis=0.7, cex.names=0.7)
+  legend("bottomright", legend = c("run3","run4","run5","run6","run7"), cex = 0.50, fill=3:7, text.font = 4)
+  
+  
+  #plotting the time it took on average to complete each step for runs 2 to 7
+  plot(as.numeric(allsteps$step[allsteps$run==3]), allsteps$time.to.complete.in.minutes[allsteps$run==3],xaxt="n", type = "l", col=3, ylim = c(0,8000),
+       xlab = "Step number", ylab = "Time to complete (minutes)", main = "Time it took to complete each step on average")
+  lines(as.numeric(allsteps$step[allsteps$run==4]), allsteps$time.to.complete.in.minutes[allsteps$run==4], type = "l", col=4)
+  lines(as.numeric(allsteps$step[allsteps$run==5]), allsteps$time.to.complete.in.minutes[allsteps$run==5], type = "l", col=5)
+  lines(as.numeric(allsteps$step[allsteps$run==6]), allsteps$time.to.complete.in.minutes[allsteps$run==6], type = "l", col=6)
+  lines(as.numeric(allsteps$step[allsteps$run==7]), allsteps$time.to.complete.in.minutes[allsteps$run==7], type = "l", col=7)
+  axis(1, at=1:length(allsteps$step[allsteps$run==3]), labels = allsteps$step[allsteps$run==3], cex.axis=0.7, cex.names=0.7)
+  legend("topleft", legend = c("run3","run4","run5","run6","run7"), cex = 0.50, fill=3:7, text.font = 4)
+  
+}
+
+get.combined.step.data.plot(allsteps)
