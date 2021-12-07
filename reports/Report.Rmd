@@ -252,11 +252,6 @@ Engagement
 
 -	Percentage of video watched according to their duration.
 
-Target Audience
-
--	Percentage of viewers that used mobile, desktop, tv, tablet.
--	Percentage of viewers from each continent.
-
 ### Verify Data Quality
 
 This appears to be okay. There are however a few things we may assume about it. First is the duration watched by learners for each video cannot account for people that downloaded that video since however much they watched, they did offline. Second assumption is videos with high percentage of watching are those with at least 95%. The reason behind this is that people may pause and close the video just a few seconds before it ends if there is nothing more to watch.
