@@ -231,7 +231,6 @@ grad.age.data.6 = get.graduate.age.data(cyber.security.6_enrolments,6)
 grad.age.data.7 = get.graduate.age.data(cyber.security.7_enrolments,7)
 
 
-
 ######################  function for getting the age graduation data for an average of all runs ############################
 
 
