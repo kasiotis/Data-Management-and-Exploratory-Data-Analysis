@@ -48,33 +48,6 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 ###########################  Analysis on the employment of learners  #######################################
 
 
-allemployments = merge(merge(merge(merge(merge(merge(
-  grad.employment.data.1,
-  grad.employment.data.2, all=TRUE),
-  grad.employment.data.3, all=TRUE),
-  grad.employment.data.4, all=TRUE),
-  grad.employment.data.5, all=TRUE),
-  grad.employment.data.6, all=TRUE),
-  grad.employment.data.7, all=TRUE)
-
-employment.names = unique(allemployments$employment.status)
-
-#initializing vectors that will hold the numbers of enrollments and graduations of each employment
-all.employment.enrollments = 1:length(employment.names)
-all.employment.graduations = 1:length(employment.names)
-
-#extracting the enrollments and graduations of each employment from all runs
-for (i in 1:length(employment.names)) {
-  all.employment.enrollments[i] = sum(allemployments$enrollements[allemployments$employment.status == employment.names[i]])
-  all.employment.graduations[i] = sum(allemployments$graduates[allemployments$employment.status == employment.names[i]])
-}
-
-#recalculating the the graduate percentage of each employment by merging the findings of all runs
-grad.employment.data.merged = data.frame(
-  employment.status = unique(allemployments$employment.status),
-  grad.percent = all.employment.graduations/all.employment.enrollments*100
-)
-
 #plotting all the employments of the learners against their respective graduate percentage average of all runs
 (employment.grad.average.plot = ggplot(grad.employment.data.merged, aes(x = employment.status, y = grad.percent))+
     geom_line(aes(group = 1), color=7))

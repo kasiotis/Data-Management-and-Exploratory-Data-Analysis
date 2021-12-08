@@ -119,7 +119,7 @@ grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments,7)
 
 ########################################## Merging the created datasets into an averaged one
 
-get.grad.country.data.merged = function(allcountries){
+get.graduate.country.data.merged = function(allcountries){
   
   country.names = unique(allcountries$country)
   
@@ -153,7 +153,7 @@ grad.country.data.allruns = merge(merge(merge(merge(merge(merge(
   grad.country.data.7, all=TRUE)
 
 
-grad.country.data.merged = get.grad.country.data.merged(grad.country.data.allruns)
+grad.country.data.merged = get.graduate.country.data.merged(grad.country.data.allruns)
 
 
 
@@ -197,10 +197,10 @@ grad.age.data.7 = get.graduate.age.data(cyber.security.7_enrolments,7)
 
 
 
-###############################  function for getting the age graduation data for an average of all runs ####################################
+######################  function for getting the age graduation data for an average of all runs ############################
 
 
-get.grad.age.data.merged = function(allages) {
+get.graduate.age.data.merged = function(allages) {
   
   #getting the unique names of the age ranges from my new set
   age.names = unique(allages$age.range)
@@ -235,7 +235,7 @@ grad.age.data.allruns = merge(merge(merge(merge(merge(merge(
   grad.age.data.7, all=TRUE)
 
 #producing a merged average age group data set out of the sets for all the runs
-grad.age.data.merged = get.grad.age.data.merged(grad.age.data.allruns)
+grad.age.data.merged = get.graduate.age.data.merged(grad.age.data.allruns)
 
 
 
@@ -244,7 +244,7 @@ grad.age.data.merged = get.grad.age.data.merged(grad.age.data.allruns)
 #############################################################################################################################################
 
 
-get.graduate.employment.data = function(enrolments.dataset){
+get.graduate.employment.data = function(enrolments.dataset, myrun){
   
   employment.enrolled = as.data.frame(table(enrolments.dataset$employment_status))
   employment.graduates = as.data.frame(table(enrolments.dataset$employment_status[enrolments.dataset$fully_participated_at!=""]))
@@ -255,6 +255,7 @@ get.graduate.employment.data = function(enrolments.dataset){
   
   return(
     data.frame(
+      run = rep(myrun, length(employment.enrolled$Var1)),
       employment.status = both.data.frames$Var1,
       enrollements = both.data.frames$Freq.x,
       graduates = both.data.frames$Freq.y,
@@ -264,14 +265,51 @@ get.graduate.employment.data = function(enrolments.dataset){
 }
 
 
-grad.employment.data.1 = get.graduate.employment.data(cyber.security.1_enrolments)
-grad.employment.data.2 = get.graduate.employment.data(cyber.security.2_enrolments)
-grad.employment.data.3 = get.graduate.employment.data(cyber.security.3_enrolments)
-grad.employment.data.4 = get.graduate.employment.data(cyber.security.4_enrolments)
-grad.employment.data.5 = get.graduate.employment.data(cyber.security.5_enrolments)
-grad.employment.data.6 = get.graduate.employment.data(cyber.security.6_enrolments)
-grad.employment.data.7 = get.graduate.employment.data(cyber.security.7_enrolments)
+grad.employment.data.1 = get.graduate.employment.data(cyber.security.1_enrolments,1)
+grad.employment.data.2 = get.graduate.employment.data(cyber.security.2_enrolments,2)
+grad.employment.data.3 = get.graduate.employment.data(cyber.security.3_enrolments,3)
+grad.employment.data.4 = get.graduate.employment.data(cyber.security.4_enrolments,4)
+grad.employment.data.5 = get.graduate.employment.data(cyber.security.5_enrolments,5)
+grad.employment.data.6 = get.graduate.employment.data(cyber.security.6_enrolments,6)
+grad.employment.data.7 = get.graduate.employment.data(cyber.security.7_enrolments,7)
 
+
+
+get.graduate.employment.data.merged = function(allemployments){
+  
+  employment.names = unique(allemployments$employment.status)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each employment
+  all.employment.enrollments = 1:length(employment.names)
+  all.employment.graduations = 1:length(employment.names)
+  
+  #extracting the enrollments and graduations of each employment from all runs
+  for (i in 1:length(employment.names)) {
+    all.employment.enrollments[i] = sum(allemployments$enrollements[allemployments$employment.status == employment.names[i]])
+    all.employment.graduations[i] = sum(allemployments$graduates[allemployments$employment.status == employment.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each employment by merging the findings of all runs
+  return(
+    data.frame(
+      employment.status = unique(allemployments$employment.status),
+      grad.percent = all.employment.graduations/all.employment.enrollments*100
+    )
+  )
+}
+
+
+grad.employment.data.allruns = merge(merge(merge(merge(merge(merge(
+  grad.employment.data.1,
+  grad.employment.data.2, all=TRUE),
+  grad.employment.data.3, all=TRUE),
+  grad.employment.data.4, all=TRUE),
+  grad.employment.data.5, all=TRUE),
+  grad.employment.data.6, all=TRUE),
+  grad.employment.data.7, all=TRUE)
+
+grad.employment.data.merged = get.graduate.employment.data.merged(grad.employment.data.allruns)
+  
 
 
 #############################################################################################################################################
@@ -309,10 +347,9 @@ grad.education.data.6 = get.graduate.education.data(cyber.security.6_enrolments,
 grad.education.data.7 = get.graduate.education.data(cyber.security.7_enrolments,7)
 
 
-###############################################  bla bal bla  ###################################################
+##############  function for getting the previous education graduate data for an average of all runs   #####################
 
-
-get.grad.education.data.merged = function(alleducations){
+get.graduate.education.data.merged = function(alleducations){
   
   education.names = unique(alleducations$education.status)
   
@@ -345,4 +382,4 @@ grad.education.data.allruns = merge(merge(merge(merge(merge(merge(
   grad.education.data.6, all=TRUE),
   grad.education.data.7, all=TRUE)
 
-grad.education.data.merged = get.grad.education.data.merged(grad.education.data.allruns)
+grad.education.data.merged = get.graduate.education.data.merged(grad.education.data.allruns)
