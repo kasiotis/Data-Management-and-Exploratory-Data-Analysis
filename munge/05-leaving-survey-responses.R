@@ -73,7 +73,7 @@ get.leaving.steps.data.merged = function(allleavingsteps) {
   
   #extracting the frequencies of each leaving step from all runs
   for (i in 1:length(step.names)) {
-    all.step.frequencies[i] = sum(allleavingsteps$frequency[allleavingsteps$leaving.steps == step.names[i]])
+    all.step.frequencies[i] = mean(allleavingsteps$frequency[allleavingsteps$leaving.steps == step.names[i]])
   }
   
   #Creating a new data frame with my extracted data
@@ -142,7 +142,7 @@ get.leaving.reason.data.merged = function(allreasons){
   
   #extracting the total frequencies of each leaving reason from all runs
   for (i in 1:length(reason.names)) {
-    all.reason.frequencies[i] = sum(allreasons$frequency[allreasons$leaving.reasons == reason.names[i]])
+    all.reason.frequencies[i] = mean(allreasons$frequency[allreasons$leaving.reasons == reason.names[i]])
   }
   
   #Creating a new data frame with my extracted data
