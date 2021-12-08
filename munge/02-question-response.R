@@ -101,7 +101,7 @@ get.quiz.data.merged = function(allquizzes){
 }
  
 
-#merging all the leaving reason data sets that I have created for all runs
+#merging the quiz data sets for runs 2 to 7 (since run1 has different step numbers and number of questions for some quizzes)
 quiz.data.allruns = merge(merge(merge(merge(merge(
   quiz.data.2,
   quiz.data.3, all=TRUE),
@@ -110,4 +110,4 @@ quiz.data.allruns = merge(merge(merge(merge(merge(
   quiz.data.6, all=TRUE),
   quiz.data.7, all=TRUE)
 
-quiz.data.merged = get.quiz.data.merged(allquizzes)
+quiz.data.merged = get.quiz.data.merged(quiz.data.allruns)
