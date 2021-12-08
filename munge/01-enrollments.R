@@ -53,7 +53,7 @@ grad.general.data = get.graduate.general.data()
 #############################################################################################################################################
 
 
-get.graduate.gender.data = function(enrolments.dataset){
+get.graduate.gender.data = function(enrolments.dataset, myrun){
   
   genders.enrolled = as.data.frame(table(enrolments.dataset$gender))
   genders.graduates = as.data.frame(table(enrolments.dataset$gender[enrolments.dataset$fully_participated_at!=""]))
@@ -64,6 +64,7 @@ get.graduate.gender.data = function(enrolments.dataset){
   
   return(
     data.frame(
+      run = rep(myrun, length(genders.enrolled$Var1)),
       gender = both.data.frames$Var1,
       enrollements = both.data.frames$Freq.x,
       graduates = both.data.frames$Freq.y,
@@ -72,15 +73,49 @@ get.graduate.gender.data = function(enrolments.dataset){
   )
 }
 
-grad.gender.data.1 = get.graduate.gender.data(cyber.security.1_enrolments)
-grad.gender.data.2 = get.graduate.gender.data(cyber.security.2_enrolments)
-grad.gender.data.3 = get.graduate.gender.data(cyber.security.3_enrolments)
-grad.gender.data.4 = get.graduate.gender.data(cyber.security.4_enrolments)
-grad.gender.data.5 = get.graduate.gender.data(cyber.security.5_enrolments)
-grad.gender.data.6 = get.graduate.gender.data(cyber.security.6_enrolments)
-grad.gender.data.7 = get.graduate.gender.data(cyber.security.7_enrolments)
+grad.gender.data.1 = get.graduate.gender.data(cyber.security.1_enrolments,1)
+grad.gender.data.2 = get.graduate.gender.data(cyber.security.2_enrolments,2)
+grad.gender.data.3 = get.graduate.gender.data(cyber.security.3_enrolments,3)
+grad.gender.data.4 = get.graduate.gender.data(cyber.security.4_enrolments,4)
+grad.gender.data.5 = get.graduate.gender.data(cyber.security.5_enrolments,5)
+grad.gender.data.6 = get.graduate.gender.data(cyber.security.6_enrolments,6)
+grad.gender.data.7 = get.graduate.gender.data(cyber.security.7_enrolments,7)
 
+############################  merging all runs into one complete set #####################
 
+get.graduate.gender.data.merged = function(allgenders) {
+  
+  gender.names = unique(allgenders$gender)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each educational background
+  all.gender.enrollments = 1:length(gender.names)
+  all.gender.graduations = 1:length(gender.names)
+  
+  #extracting the enrollments and graduations of each educational background from all runs
+  for (i in 1:length(gender.names)) {
+    all.gender.enrollments[i] = sum(allgenders$enrollements[allgenders$gender == gender.names[i]])
+    all.gender.graduations[i] = sum(allgenders$graduates[allgenders$gender == gender.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each educational background by merging the findings of all runs
+  return(
+    data.frame(
+      gender = unique(allgenders$gender),
+      grad.percent = all.gender.graduations/all.gender.enrollments*100
+    )
+  )
+}
+
+grad.gender.data.allruns = merge(merge(merge(merge(merge(merge(
+  grad.gender.data.1,
+  grad.gender.data.2, all=TRUE),
+  grad.gender.data.3, all=TRUE),
+  grad.gender.data.4, all=TRUE),
+  grad.gender.data.5, all=TRUE),
+  grad.gender.data.6, all=TRUE),
+  grad.gender.data.7, all=TRUE)
+
+grad.gender.data.merged = get.graduate.gender.data.merged(grad.gender.data.allruns)
 
 #############################################################################################################################################
 ###################################  enrollment and graduation data based on learners detected country  #####################################
@@ -117,7 +152,7 @@ grad.country.data.6 = get.graduate.country.data(cyber.security.6_enrolments,6)
 grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments,7)
 
 
-########################################## Merging the created datasets into an averaged one
+########################################## Merging the created datasets into an averaged one ###########################
 
 get.graduate.country.data.merged = function(allcountries){
   
@@ -273,7 +308,7 @@ grad.employment.data.5 = get.graduate.employment.data(cyber.security.5_enrolment
 grad.employment.data.6 = get.graduate.employment.data(cyber.security.6_enrolments,6)
 grad.employment.data.7 = get.graduate.employment.data(cyber.security.7_enrolments,7)
 
-
+############################# merging all datasets in one combined set ###################################################
 
 get.graduate.employment.data.merged = function(allemployments){
   
@@ -297,7 +332,6 @@ get.graduate.employment.data.merged = function(allemployments){
     )
   )
 }
-
 
 grad.employment.data.allruns = merge(merge(merge(merge(merge(merge(
   grad.employment.data.1,
