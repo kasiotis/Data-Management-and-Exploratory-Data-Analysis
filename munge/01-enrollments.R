@@ -87,7 +87,7 @@ grad.gender.data.7 = get.graduate.gender.data(cyber.security.7_enrolments)
 #############################################################################################################################################
 
 
-get.graduate.country.data = function(enrolments.dataset){
+get.graduate.country.data = function(enrolments.dataset, myrun){
   
   countries.enrolled = as.data.frame(table(enrolments.dataset$detected_country))
   countries.graduates = as.data.frame(table(enrolments.dataset$detected_country[enrolments.dataset$fully_participated_at!=""]))
@@ -98,6 +98,7 @@ get.graduate.country.data = function(enrolments.dataset){
   
   return(
     data.frame(
+      run = rep(myrun, length(countries.enrolled$Var1)),
       country = both.data.frames$Var1,
       enrollements = both.data.frames$Freq.x,
       graduates = both.data.frames$Freq.y,
@@ -107,13 +108,52 @@ get.graduate.country.data = function(enrolments.dataset){
 }
 
 
-grad.country.data.1 = get.graduate.country.data(cyber.security.1_enrolments)
-grad.country.data.2 = get.graduate.country.data(cyber.security.2_enrolments)
-grad.country.data.3 = get.graduate.country.data(cyber.security.3_enrolments)
-grad.country.data.4 = get.graduate.country.data(cyber.security.4_enrolments)
-grad.country.data.5 = get.graduate.country.data(cyber.security.5_enrolments)
-grad.country.data.6 = get.graduate.country.data(cyber.security.6_enrolments)
-grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments)
+grad.country.data.1 = get.graduate.country.data(cyber.security.1_enrolments,1)
+grad.country.data.2 = get.graduate.country.data(cyber.security.2_enrolments,2)
+grad.country.data.3 = get.graduate.country.data(cyber.security.3_enrolments,3)
+grad.country.data.4 = get.graduate.country.data(cyber.security.4_enrolments,4)
+grad.country.data.5 = get.graduate.country.data(cyber.security.5_enrolments,5)
+grad.country.data.6 = get.graduate.country.data(cyber.security.6_enrolments,6)
+grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments,7)
+
+
+####### Merging the created datasets into an averaged one
+
+get.grad.country.data.merged = function(allcountries){
+  
+  country.names = unique(allcountries$country)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each country
+  all.country.enrollments = 1:length(country.names)
+  all.country.graduations = 1:length(country.names)
+  
+  #extracting the enrollments and graduations of each country from all runs
+  for (i in 1:length(country.names)) {
+    all.country.enrollments[i] = sum(allcountries$enrollements[allcountries$country == country.names[i]])
+    all.country.graduations[i] = sum(allcountries$graduates[allcountries$country == country.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each country by merging the findings of all runs
+  return(
+    data.frame(
+      country = unique(allcountries$country),
+      grad.percent = all.country.graduations/all.country.enrollments*100
+    )
+  )
+}
+
+
+grad.country.data.allruns = merge(merge(merge(merge(merge(merge(
+  grad.country.data.1,
+  grad.country.data.2, all=TRUE),
+  grad.country.data.3, all=TRUE),
+  grad.country.data.4, all=TRUE),
+  grad.country.data.5, all=TRUE),
+  grad.country.data.6, all=TRUE),
+  grad.country.data.7, all=TRUE)
+
+
+grad.country.data.merged = get.grad.country.data.merged(grad.country.data.allruns)
 
 
 

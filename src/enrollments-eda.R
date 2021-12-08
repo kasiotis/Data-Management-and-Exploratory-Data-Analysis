@@ -25,33 +25,6 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 ###############################  Analysis on the country of learners  #######################################
 
 
-allcountries = merge(merge(merge(merge(merge(merge(
-      grad.country.data.1,
-      grad.country.data.2, all=TRUE),
-      grad.country.data.3, all=TRUE),
-      grad.country.data.4, all=TRUE),
-      grad.country.data.5, all=TRUE),
-      grad.country.data.6, all=TRUE),
-      grad.country.data.7, all=TRUE)
-
-country.names = unique(allcountries$country)
-
-#initializing vectors that will hold the numbers of enrollments and graduations of each country
-all.country.enrollments = 1:length(country.names)
-all.country.graduations = 1:length(country.names)
-
-#extracting the enrollments and graduations of each country from all runs
-for (i in 1:length(country.names)) {
-  all.country.enrollments[i] = sum(allcountries$enrollements[allcountries$country == country.names[i]])
-  all.country.graduations[i] = sum(allcountries$graduates[allcountries$country == country.names[i]])
-}
-
-#recalculating the the graduate percentage of each country by merging the findings of all runs
-grad.country.data.merged = data.frame(
-  country = unique(allcountries$country),
-  grad.percent = all.country.graduations/all.country.enrollments*100
-)
-
 #plotting all the countries of origin of the learners against their respective graduate percentage
 (country.grad.average.plot = ggplot(grad.country.data.merged, aes(x = country, y = grad.percent))+
   geom_line(aes(group = 1), color=7))
@@ -63,7 +36,7 @@ grad.country.data.merged = data.frame(
 
 
 
-###########################  Analysis on the previous education of learners  #######################################
+###########################  Analysis on the previous education of learners  ################################
 
 alleducations = merge(merge(merge(merge(merge(merge(
   grad.education.data.1,
