@@ -38,32 +38,6 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 
 ###########################  Analysis on the previous education of learners  ################################
 
-alleducations = merge(merge(merge(merge(merge(merge(
-  grad.education.data.1,
-  grad.education.data.2, all=TRUE),
-  grad.education.data.3, all=TRUE),
-  grad.education.data.4, all=TRUE),
-  grad.education.data.5, all=TRUE),
-  grad.education.data.6, all=TRUE),
-  grad.education.data.7, all=TRUE)
-
-education.names = unique(alleducations$education.status)
-
-#initializing vectors that will hold the numbers of enrollments and graduations of each educational background
-all.education.enrollments = 1:length(education.names)
-all.education.graduations = 1:length(education.names)
-
-#extracting the enrollments and graduations of each educational background from all runs
-for (i in 1:length(education.names)) {
-  all.education.enrollments[i] = sum(alleducations$enrollements[alleducations$education.status == education.names[i]])
-  all.education.graduations[i] = sum(alleducations$graduates[alleducations$education.status == education.names[i]])
-}
-
-#recalculating the the graduate percentage of each educational background by merging the findings of all runs
-grad.education.data.merged = data.frame(
-  education.status = unique(alleducations$education.status),
-  grad.percent = all.education.graduations/all.education.enrollments*100
-)
 
 #plotting all the educational backgrounds of the learners against their respective graduate percentage average of all runs
 (education.grad.average.plot = ggplot(grad.education.data.merged, aes(x = education.status, y = grad.percent))+

@@ -117,7 +117,7 @@ grad.country.data.6 = get.graduate.country.data(cyber.security.6_enrolments,6)
 grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments,7)
 
 
-####### Merging the created datasets into an averaged one
+########################################## Merging the created datasets into an averaged one
 
 get.grad.country.data.merged = function(allcountries){
   
@@ -197,7 +197,9 @@ grad.age.data.7 = get.graduate.age.data(cyber.security.7_enrolments,7)
 
 
 
-#########  function for getting the age graduation data for an average of all runs
+###############################  function for getting the age graduation data for an average of all runs ####################################
+
+
 get.grad.age.data.merged = function(allages) {
   
   #getting the unique names of the age ranges from my new set
@@ -277,7 +279,7 @@ grad.employment.data.7 = get.graduate.employment.data(cyber.security.7_enrolment
 #############################################################################################################################################
 
 
-get.graduate.education.data = function(enrolments.dataset){
+get.graduate.education.data = function(enrolments.dataset, myrun){
   
   education.enrolled = as.data.frame(table(enrolments.dataset$highest_education_level))
   education.graduates = as.data.frame(table(enrolments.dataset$highest_education_level[enrolments.dataset$fully_participated_at!=""]))
@@ -288,6 +290,7 @@ get.graduate.education.data = function(enrolments.dataset){
   
   return(
     data.frame(
+      run = rep(myrun, length(education.enrolled$Var1)),
       education.status = both.data.frames$Var1,
       enrollements = both.data.frames$Freq.x,
       graduates = both.data.frames$Freq.y,
@@ -297,10 +300,49 @@ get.graduate.education.data = function(enrolments.dataset){
 }
 
 
-grad.education.data.1 = get.graduate.education.data(cyber.security.1_enrolments)
-grad.education.data.2 = get.graduate.education.data(cyber.security.2_enrolments)
-grad.education.data.3 = get.graduate.education.data(cyber.security.3_enrolments)
-grad.education.data.4 = get.graduate.education.data(cyber.security.4_enrolments)
-grad.education.data.5 = get.graduate.education.data(cyber.security.5_enrolments)
-grad.education.data.6 = get.graduate.education.data(cyber.security.6_enrolments)
-grad.education.data.7 = get.graduate.education.data(cyber.security.7_enrolments)
+grad.education.data.1 = get.graduate.education.data(cyber.security.1_enrolments,1)
+grad.education.data.2 = get.graduate.education.data(cyber.security.2_enrolments,2)
+grad.education.data.3 = get.graduate.education.data(cyber.security.3_enrolments,3)
+grad.education.data.4 = get.graduate.education.data(cyber.security.4_enrolments,4)
+grad.education.data.5 = get.graduate.education.data(cyber.security.5_enrolments,5)
+grad.education.data.6 = get.graduate.education.data(cyber.security.6_enrolments,6)
+grad.education.data.7 = get.graduate.education.data(cyber.security.7_enrolments,7)
+
+
+###############################################  bla bal bla  ###################################################
+
+
+get.grad.education.data.merged = function(alleducations){
+  
+  education.names = unique(alleducations$education.status)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each educational background
+  all.education.enrollments = 1:length(education.names)
+  all.education.graduations = 1:length(education.names)
+  
+  #extracting the enrollments and graduations of each educational background from all runs
+  for (i in 1:length(education.names)) {
+    all.education.enrollments[i] = sum(alleducations$enrollements[alleducations$education.status == education.names[i]])
+    all.education.graduations[i] = sum(alleducations$graduates[alleducations$education.status == education.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each educational background by merging the findings of all runs
+  return(
+    data.frame(
+      education.status = unique(alleducations$education.status),
+      grad.percent = all.education.graduations/all.education.enrollments*100
+    )
+  )
+}
+
+
+grad.education.data.allruns = merge(merge(merge(merge(merge(merge(
+  grad.education.data.1,
+  grad.education.data.2, all=TRUE),
+  grad.education.data.3, all=TRUE),
+  grad.education.data.4, all=TRUE),
+  grad.education.data.5, all=TRUE),
+  grad.education.data.6, all=TRUE),
+  grad.education.data.7, all=TRUE)
+
+grad.education.data.merged = get.grad.education.data.merged(grad.education.data.allruns)
