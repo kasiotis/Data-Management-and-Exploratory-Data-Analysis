@@ -16,22 +16,45 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 ##################################  Analysis on Age range graduates  ########################################
 
 
-#plotting all the countries of origin of the learners against their respective graduate percentage
-(age.grad.average.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
+#plotting all the age ranges of the learners against their respective graduate percentage (merged runs)
+(age.grad.merged.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
 
+#plotting all the age ranges of the learners against their respective graduate percentage (all runs)
+age.grad.crossrun.plot = function(){
+  plot(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==1]),
+       grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==1], xaxt="n", type = "l", col=1,
+       ylim = c(0,max(grad.gender.data.allruns$graduate.percentage)*2), xlab = "Age-Range", ylab = "Percentage of Graduates",
+       main = "Percentage of Graduates for each age-range")
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==2]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==2], type = "l", col=2)
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==3]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==3], type = "l", col=3)
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==4]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==4], type = "l", col=4)
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==5]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==5], type = "l", col=5)
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==6]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==6], type = "l", col=6)
+  lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==7]),
+        grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==7], type = "l", col=7)
+  axis(1, at=1:length(grad.age.data.allruns$age.range[grad.age.data.allruns$run==1]),
+       labels = grad.age.data.allruns$age.range[grad.age.data.allruns$run==1], cex.axis=0.7, cex.names=0.7)
+  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+}
 
+age.grad.crossrun.plot()
 
 ###############################  Analysis on the country of learners  #######################################
 
 
 #plotting all the countries of origin of the learners against their respective graduate percentage
-(country.grad.average.plot = ggplot(grad.country.data.merged, aes(x = country, y = grad.percent))+
+(country.grad.merged.plot = ggplot(grad.country.data.merged, aes(x = country, y = grad.percent))+
   geom_line(aes(group = 1), color=7))
 
 #plotting all the countries of origin of the learners against their respective graduate percentage
 #but only displaying the countries where the graduation percentage was greater than or equal to 20%
-(country.grad.average.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+
+(country.grad.merged.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+
   geom_line(aes(group = 1), color=7))
 
 
@@ -40,7 +63,7 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 
 
 #plotting all the educational backgrounds of the learners against their respective graduate percentage average of all runs
-(education.grad.average.plot = ggplot(grad.education.data.merged, aes(x = education.status, y = grad.percent))+
+(education.grad.merged.plot = ggplot(grad.education.data.merged, aes(x = education.status, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
 
 
@@ -49,14 +72,14 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 
 
 #plotting all the employments of the learners against their respective graduate percentage average of all runs
-(employment.grad.average.plot = ggplot(grad.employment.data.merged, aes(x = employment.status, y = grad.percent))+
+(employment.grad.merged.plot = ggplot(grad.employment.data.merged, aes(x = employment.status, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
 
 
 
-###########################  Analysis on the gender of learners  #######################################
+###########################  Analysis on the gender of learners  ###########################################
 
 
 #plotting all the educational backgrounds of the learners against their respective graduate percentage average of all runs
-(gender.grad.average.plot = ggplot(grad.gender.data.merged, aes(x = gender, y = grad.percent))+
+(gender.grad.merged.plot = ggplot(grad.gender.data.merged, aes(x = gender, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
