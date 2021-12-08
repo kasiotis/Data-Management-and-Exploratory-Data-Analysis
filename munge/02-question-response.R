@@ -6,7 +6,7 @@
 ################################################################# Quiz Data #######################################################################
 
 #creating a function that extracts information about the performance of the quizzes for a given run 
-get.quiz.data = function(question.response.dataset) {
+get.quiz.data = function(question.response.dataset, myrun) {
   
   #creating a data frame for the number of questions answered in each quiz (also recording the week number for later use)
   quiz.answers.given = as.data.frame(table(question.response.dataset$week_number,
@@ -44,6 +44,7 @@ get.quiz.data = function(question.response.dataset) {
   
   #returning a newly created data frame of all the extracted values that will help me address my business goals
   finalset = data.frame(
+    run = rep(myrun, length(quiz.answers.given$Var1)),
     quiz=quiz.step,
     answers_given = quiz.answers.given$Freq,
     answers_correct = quiz.correct.answers$Freq,
@@ -55,17 +56,58 @@ get.quiz.data = function(question.response.dataset) {
 }
 
 #calling "get.quiz.data" function for run 1
-quiz.data.1 = get.quiz.data(cyber.security.1_question.response)
+quiz.data.1 = get.quiz.data(cyber.security.1_question.response,1)
 #calling "get.quiz.data" function for run 2
-quiz.data.2 = get.quiz.data(cyber.security.2_question.response)
+quiz.data.2 = get.quiz.data(cyber.security.2_question.response,2)
 #calling "get.quiz.data" function for run 3
-quiz.data.3 = get.quiz.data(cyber.security.3_question.response)
+quiz.data.3 = get.quiz.data(cyber.security.3_question.response,3)
 #calling "get.quiz.data" function for run 4
-quiz.data.4 = get.quiz.data(cyber.security.4_question.response)
+quiz.data.4 = get.quiz.data(cyber.security.4_question.response,4)
 #calling "get.quiz.data" function for run 5
-quiz.data.5 = get.quiz.data(cyber.security.5_question.response)
+quiz.data.5 = get.quiz.data(cyber.security.5_question.response,5)
 #calling "get.quiz.data" function for run 6
-quiz.data.6 = get.quiz.data(cyber.security.6_question.response)
+quiz.data.6 = get.quiz.data(cyber.security.6_question.response,6)
 #calling "get.quiz.data" function for run 7
-quiz.data.7 = get.quiz.data(cyber.security.7_question.response)
+quiz.data.7 = get.quiz.data(cyber.security.7_question.response,7)
 
+
+####################################################
+
+get.quiz.data.merged = function(allquizzes){
+  
+  #getting the unique names of the age ranges from my new set
+  question.names = unique(allquizzes$quiz)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each country
+  all.answer.frequencies = 1:length(question.names)
+  all.correct.frequencies = 1:length(question.names)
+  
+  #extracting the enrollments and graduations of each country from all runs
+  for (i in 1:length(question.names)) {
+    all.answer.frequencies[i] = mean(allquizzes$answers_given[allquizzes$quiz == question.names[i]])
+    all.correct.frequencies[i] = mean(allquizzes$answers_correct[allquizzes$quiz == question.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each country by merging the findings of all runs
+  return(
+    data.frame(
+      quiz = question.names,
+      answers_given = all.answer.frequencies,
+      answers_correct = all.correct.frequencies,
+      success_percentage = all.correct.frequencies/all.answer.frequencies*100,
+      number_of_questions = quiz.data.1$number_of_questions
+    )
+  )
+}
+ 
+
+#merging all the leaving reason data sets that I have created for all runs
+quiz.data.allruns = merge(merge(merge(merge(merge(
+  quiz.data.2,
+  quiz.data.3, all=TRUE),
+  quiz.data.4, all=TRUE),
+  quiz.data.5, all=TRUE),
+  quiz.data.6, all=TRUE),
+  quiz.data.7, all=TRUE)
+
+quiz.data.merged = get.quiz.data.merged(allquizzes)
