@@ -8,7 +8,7 @@ quiz.crossrun.plot = function(){
   
   plot(1:length(quiz.data.allruns$quiz[quiz.data.allruns$run==2]),
        quiz.data.allruns$success_percentage[quiz.data.allruns$run==2], xaxt="n", type = "l", col=2,
-       ylim = c(0,100), xlab = "quizzes", ylab = "Percentage of Graduates",)
+       ylim = c(0,100), xlab = "quizzes", ylab = "Percentage of Graduates", main = "Quizzes success percentage across runs")
   lines(1:length(quiz.data.allruns$quiz[quiz.data.allruns$run==3]),
         quiz.data.allruns$success_percentage[quiz.data.allruns$run==3], type = "l", col=3)
   lines(1:length(quiz.data.allruns$quiz[quiz.data.allruns$run==4]),
@@ -27,9 +27,10 @@ quiz.crossrun.plot()
 
 
 #checking the success percentage of each quiz for all runs
-barplot(quiz.data.merged$success_percentage, axisnames = TRUE, names.arg = quiz.data.merged$quiz, col = rainbow(5), ylim = c(0,100),
-        xlab = "Steps", ylab = "Percentage of correct answers given", main = "Quiz/Test success percentage")
+quiz.merged.plot = barplot(quiz.data.merged$success_percentage, axisnames = TRUE, names.arg = quiz.data.merged$quiz, col = rainbow(5), 
+                           ylim = c(0,100), xlab = "Steps", ylab = "Percentage of correct answers given", main = "Quiz/Test success percentage")
+
 
 #checking the correlation of the number of questions and the percentage of success
-plot(quiz.data.merged$number_of_questions, quiz.data.merged$success_percentage)
-
+quiz.question.num.plot = plot(quiz.data.merged$number_of_questions, quiz.data.merged$success_percentage, xlab = "Number of Questions",
+                              ylab = "Succes Percentage", main = "The effect of number of questions on the Success Percentage")
