@@ -16,54 +16,13 @@ barplot(grad.general.data$graduation.percent, col="red", main ="Percentage of gr
 ##################################  Analysis on Age range graduates  ########################################
 
 
-#percentage of graduates according to their age
-age.grad.allruns.plot = ggplot(grad.age.data.1, aes(x = age.range, y = graduate.percentage))+
-  geom_line(aes(group = 1), color=7) +
-  geom_line(data = grad.age.data.2, aes(group =1), color=1)+
-  geom_line(data = grad.age.data.3, aes(group =1), color=2)+
-  geom_line(data = grad.age.data.4, aes(group =1), color=3)+
-  geom_line(data = grad.age.data.5, aes(group =1), color=4)+
-  geom_line(data = grad.age.data.6, aes(group =1), color=5)+
-  geom_line(data = grad.age.data.7, aes(group =1), color=6)+
-  labs(title = "Graduation percentage of each run for all age ranges",
-       x = "Age ranges", y = "Graduation Percentage") 
-
-#merging all the age data sets that I have created for all runs
-allages = merge(merge(merge(merge(merge(merge(
-  grad.age.data.1,
-  grad.age.data.2, all=TRUE),
-  grad.age.data.3, all=TRUE),
-  grad.age.data.4, all=TRUE),
-  grad.age.data.5, all=TRUE),
-  grad.age.data.6, all=TRUE),
-  grad.age.data.7, all=TRUE)
-
-#getting the unique names of the age ranges from my new set
-age.names = unique(allages$age.range)
-
-#initializing vectors that will hold the numbers of enrollments and graduations of each country
-all.age.enrollments = 1:length(age.names)
-all.age.graduations = 1:length(age.names)
-
-#extracting the enrollments and graduations of each country from all runs
-for (i in 1:length(age.names)) {
-  all.age.enrollments[i] = sum(allages$enrollements[allages$age.range == age.names[i]])
-  all.age.graduations[i] = sum(allages$graduates[allages$age.range == age.names[i]])
-}
-
-#recalculating the the graduate percentage of each country by merging the findings of all runs
-grad.age.data.merged = data.frame(
-  age = unique(allages$age.range),
-  grad.percent = all.age.graduations/all.age.enrollments*100
-)
-
 #plotting all the countries of origin of the learners against their respective graduate percentage
 (age.grad.average.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
     geom_line(aes(group = 1), color=7))
 
 
 
-##################################  Analysis on the country of learners  ##########################################
+###############################  Analysis on the country of learners  #######################################
 
 
 allcountries = merge(merge(merge(merge(merge(merge(

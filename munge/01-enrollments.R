@@ -1,5 +1,6 @@
-####################### recording enrollments and completions ###################################
-
+##################################################################################################################################################
+############################################### recording enrollments and completions ############################################################
+##################################################################################################################################################
 get.graduate.general.data = function(){
   
   #finding the number of enrolments in each run
@@ -47,7 +48,9 @@ grad.general.data = get.graduate.general.data()
 
 
 
-########################################  enrollment and graduation data based on learners gender  ##############################################
+#############################################################################################################################################
+########################################  enrollment and graduation data based on learners gender  ##########################################
+#############################################################################################################################################
 
 
 get.graduate.gender.data = function(enrolments.dataset){
@@ -79,8 +82,9 @@ grad.gender.data.7 = get.graduate.gender.data(cyber.security.7_enrolments)
 
 
 
-
-###################################  enrollment and graduation data based on learners detected country  ##########################################
+#############################################################################################################################################
+###################################  enrollment and graduation data based on learners detected country  #####################################
+#############################################################################################################################################
 
 
 get.graduate.country.data = function(enrolments.dataset){
@@ -113,10 +117,13 @@ grad.country.data.7 = get.graduate.country.data(cyber.security.7_enrolments)
 
 
 
-#######################################  enrollment and graduation data based on learners age group  #############################################
+#############################################################################################################################################
+#######################################  enrollment and graduation data based on learners age group  ########################################
+#############################################################################################################################################
 
 
-get.graduate.age.data = function(enrolments.dataset){
+#########  Function that extracts the age group graduation data
+get.graduate.age.data = function(enrolments.dataset, myrun){
   
   ages.enrolled = as.data.frame(table(enrolments.dataset$age_range))
   ages.graduates = as.data.frame(table(enrolments.dataset$age_range[enrolments.dataset$fully_participated_at!=""]))
@@ -129,6 +136,7 @@ get.graduate.age.data = function(enrolments.dataset){
   
   #creating a data frame with all of the newly created information
   result = data.frame(
+    run = rep(myrun, length(ages.enrolled$Var1)),
     age.range = both.data.frames$Var1,
     enrollements = both.data.frames$Freq.x,
     graduates = both.data.frames$Freq.y,
@@ -139,17 +147,59 @@ get.graduate.age.data = function(enrolments.dataset){
 }
 
 
-grad.age.data.1 = get.graduate.age.data(cyber.security.1_enrolments)
-grad.age.data.2 = get.graduate.age.data(cyber.security.2_enrolments)
-grad.age.data.3 = get.graduate.age.data(cyber.security.3_enrolments)
-grad.age.data.4 = get.graduate.age.data(cyber.security.4_enrolments)
-grad.age.data.5 = get.graduate.age.data(cyber.security.5_enrolments)
-grad.age.data.6 = get.graduate.age.data(cyber.security.6_enrolments)
-grad.age.data.7 = get.graduate.age.data(cyber.security.7_enrolments)
+grad.age.data.1 = get.graduate.age.data(cyber.security.1_enrolments,1)
+grad.age.data.2 = get.graduate.age.data(cyber.security.2_enrolments,2)
+grad.age.data.3 = get.graduate.age.data(cyber.security.3_enrolments,3)
+grad.age.data.4 = get.graduate.age.data(cyber.security.4_enrolments,4)
+grad.age.data.5 = get.graduate.age.data(cyber.security.5_enrolments,5)
+grad.age.data.6 = get.graduate.age.data(cyber.security.6_enrolments,6)
+grad.age.data.7 = get.graduate.age.data(cyber.security.7_enrolments,7)
 
 
 
-#######################################  enrollment and graduation data based on learners employment  ############################################
+#########  function for getting the age graduation data for an average of all runs
+get.grad.age.data.merged = function(allages) {
+  
+  #getting the unique names of the age ranges from my new set
+  age.names = unique(allages$age.range)
+  
+  #initializing vectors that will hold the numbers of enrollments and graduations of each country
+  all.age.enrollments = 1:length(age.names)
+  all.age.graduations = 1:length(age.names)
+  
+  #extracting the enrollments and graduations of each country from all runs
+  for (i in 1:length(age.names)) {
+    all.age.enrollments[i] = sum(allages$enrollements[allages$age.range == age.names[i]])
+    all.age.graduations[i] = sum(allages$graduates[allages$age.range == age.names[i]])
+  }
+  
+  #recalculating the the graduate percentage of each country by merging the findings of all runs
+   return(
+     data.frame(
+       age = unique(allages$age.range),
+       grad.percent = all.age.graduations/all.age.enrollments*100
+     )
+   )
+}
+
+#combining all the age data sets that I have created for all runs
+grad.age.data.allruns = merge(merge(merge(merge(merge(merge(
+  grad.age.data.1,
+  grad.age.data.2, all=TRUE),
+  grad.age.data.3, all=TRUE),
+  grad.age.data.4, all=TRUE),
+  grad.age.data.5, all=TRUE),
+  grad.age.data.6, all=TRUE),
+  grad.age.data.7, all=TRUE)
+
+#producing a merged average age group data set out of the sets for all the runs
+grad.age.data.merged = get.grad.age.data.merged(grad.age.data.allruns)
+
+
+
+#############################################################################################################################################
+#######################################  enrollment and graduation data based on learners employment  #######################################
+#############################################################################################################################################
 
 
 get.graduate.employment.data = function(enrolments.dataset){
@@ -182,7 +232,9 @@ grad.employment.data.7 = get.graduate.employment.data(cyber.security.7_enrolment
 
 
 
-#######################################  enrollment and graduation data based on learners education  ############################################
+#############################################################################################################################################
+#######################################  enrollment and graduation data based on learners education  ########################################
+#############################################################################################################################################
 
 
 get.graduate.education.data = function(enrolments.dataset){

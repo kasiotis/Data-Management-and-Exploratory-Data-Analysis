@@ -50,7 +50,7 @@ pairs(step.success.data.merged)
 
 ########################### Cross-run plots #############################
 
-get.combined.step.data.plot = function(all.step.activity.dataset) {
+get.step.success.data.allruns.plot = function(all.step.activity.dataset) {
   
   par(mfrow=c(2,1))
   
@@ -77,4 +77,4 @@ get.combined.step.data.plot = function(all.step.activity.dataset) {
   
 }
 
-get.combined.step.data.plot(allsteps)
+get.step.success.data.allruns.plot(step.success.data.allruns)
