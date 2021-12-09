@@ -53,25 +53,25 @@ get.leaving.step.data = function(leaving.survey.dataset, myrun){
     frequency = leaving.step$Freq))
 }
 
-#calling the function that creates the leaving step data, for all the runs that has such datasets
+#calling the function that creates the leaving step data, for all the runs that have such datasets
 leaving.step.data.4 = get.leaving.step.data(cyber.security.4_leaving.survey.responses,4)
 leaving.step.data.5 = get.leaving.step.data(cyber.security.5_leaving.survey.responses,5)
 leaving.step.data.6 = get.leaving.step.data(cyber.security.6_leaving.survey.responses,6)
 leaving.step.data.7 = get.leaving.step.data(cyber.security.7_leaving.survey.responses,7)
 
 
-######################### producing a merged set of all the runs ##############################
+###################### producing a merged set with averaged step frequencies of all the runs ##############################
 
 
 get.leaving.steps.data.merged = function(allleavingsteps) {
   
-  #getting the unique names of the age ranges from my new set
+  #getting the unique names of the steps from my new set
   step.names = unique(allleavingsteps$leaving.steps)
   
   #initializing vectors that will hold the frequencies of each leaving step
   all.step.frequencies = 1:length(step.names)
   
-  #extracting the frequencies of each leaving step from all runs
+  #extracting the average frequencies for each leaving step that was found in all runs
   for (i in 1:length(step.names)) {
     all.step.frequencies[i] = mean(allleavingsteps$frequency[allleavingsteps$leaving.steps == step.names[i]])
   }
@@ -81,18 +81,18 @@ get.leaving.steps.data.merged = function(allleavingsteps) {
     leaving.step = as.numeric(as.character(step.names)),
     frequency = all.step.frequencies
   )
-  #reordering the dataset by the leaving step so that it can be plotted nicely and returning it
+  #reordering the dataset by the leaving step (low-High) so that it can be plotted nicely, and returning it
   return(leaving.steps.data.merged[order(leaving.steps.data.merged$leaving.step),])
 }
 
-#merging all the leaving reason data sets that I have created for all runs
+#centralizing all the leaving step data sets that I have created for runs 4-7
 leaving.steps.data.allruns = merge(merge(merge(
   leaving.step.data.4,
   leaving.step.data.5, all=TRUE),
   leaving.step.data.6, all=TRUE),
   leaving.step.data.7, all=TRUE)
 
-#calling the function I just created to get the merged version of runs 4-7
+#calling the function I just created to get the averaged version of runs 4-7
 leaving.steps.data.merged = get.leaving.steps.data.merged(leaving.steps.data.allruns)
 
 
@@ -128,7 +128,7 @@ leaving.reason.data.6 = get.leaving.reason.data(cyber.security.6_leaving.survey.
 leaving.reason.data.7 = get.leaving.reason.data(cyber.security.7_leaving.survey.responses,7)
 
 
-######################### producing a merged set of all the runs ##############################
+###################### producing a averaged set of all the leaving reason sets ############################
 
 
 get.leaving.reason.data.merged = function(allreasons){
@@ -159,4 +159,5 @@ leaving.reason.data.allruns = merge(merge(merge(
   leaving.reason.data.6, all=TRUE),
   leaving.reason.data.7, all=TRUE)
 
+#calling the function I just created to get the averaged version of runs 4-7
 leaving.reason.data.merged = get.leaving.reason.data.merged(leaving.reason.data.allruns)

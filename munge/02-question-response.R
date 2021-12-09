@@ -1,9 +1,7 @@
 ###################################################################################################################################################
-#########################################################      Data Construction      #############################################################
+###########################  Extracting the percentage of correct answers and the number of questions of each quiz  ##########################
 ###################################################################################################################################################
 
-
-################################################################# Quiz Data #######################################################################
 
 #creating a function that extracts information about the performance of the quizzes for a given run 
 get.quiz.data = function(question.response.dataset, myrun) {
@@ -71,24 +69,27 @@ quiz.data.6 = get.quiz.data(cyber.security.6_question.response,6)
 quiz.data.7 = get.quiz.data(cyber.security.7_question.response,7)
 
 
-####################################################
+###################################################################################################################################################
+###########################################  producing a averaged set of all the quiz data sets ##############################################
+###################################################################################################################################################
+
 
 get.quiz.data.merged = function(allquizzes){
   
-  #getting the unique names of the age ranges from my new set
+  #getting the unique names of the quizzes from my new set
   question.names = unique(allquizzes$quiz)
   
-  #initializing vectors that will hold the numbers of enrollments and graduations of each country
+  #initializing vectors that will hold the numbers of total answers given and that of the correct ones
   all.answer.frequencies = 1:length(question.names)
   all.correct.frequencies = 1:length(question.names)
   
-  #extracting the enrollments and graduations of each country from all runs
+  #extracting the numbers of total answers given and that of the correct ones from all runs
   for (i in 1:length(question.names)) {
     all.answer.frequencies[i] = mean(allquizzes$answers_given[allquizzes$quiz == question.names[i]])
     all.correct.frequencies[i] = mean(allquizzes$answers_correct[allquizzes$quiz == question.names[i]])
   }
   
-  #recalculating the the graduate percentage of each country by merging the findings of all runs
+  #recalculating the the correctness percentage of each quiz by merging the findings of all runs
   return(
     data.frame(
       quiz = question.names,

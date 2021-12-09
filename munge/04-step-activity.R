@@ -16,8 +16,8 @@ clean.step.activity = function(step.activity.dataset){
 #############################################################################################################################################
 
 
-#Function that takes in a step.activity data set and extracts the step data about the number of learner that started and finished each step, their
-#completion percentage, and lastly the time it took them on average to complete that step.
+#Function that takes in a step.activity data set and extracts the step data about the number of learner that started and finished 
+#each step, their completion percentage, and lastly the time it took them on average to complete that step.
 get.step.participants = function(step.activity.dataset, myrun){
   
   #extracting the number of participants in each step
@@ -90,6 +90,7 @@ step.success.data.7 = get.step.participants(clean.step.activity(cyber.security.7
 ################################################# Doing data combining and data merging  ####################################################
 #############################################################################################################################################
 
+
 get.merged.step.succes.data = function(allsteps){
   
   #getting the unique names of the steps from my new set
@@ -100,13 +101,13 @@ get.merged.step.succes.data = function(allsteps){
   all.completionists.frequencies = 1:length(step.names)
   all.times.frequencies = 1:length(step.names)
   
-  #extracting the numbers of participants, completionists and times taken to complete each step, for each step
+  #extracting the average number from all runs about the participants, completionists and times taken to complete each step, 
   for (i in 1:length(step.names)) {
     all.participants.frequencies[i] = mean(allsteps$step.participants[allsteps$step == step.names[i]])
     all.completionists.frequencies[i] = mean(allsteps$step.completionists[allsteps$step == step.names[i]])
     all.times.frequencies[i] = mean(allsteps$time.to.complete.in.minutes[allsteps$step == step.names[i]])
   }
-  
+  #returning my dataset with my merged run
   return(data.frame(
     step = step.names,
     step.participants = all.participants.frequencies,
@@ -117,7 +118,7 @@ get.merged.step.succes.data = function(allsteps){
   )
 }
 
-#merging my step.success datasets into on dataframe
+#merging my step.success datasets into one dataframe
 step.success.data.allruns = merge(merge(merge(merge(
   step.success.data.3,
   step.success.data.4, all=TRUE),
@@ -126,6 +127,6 @@ step.success.data.allruns = merge(merge(merge(merge(
   step.success.data.7, all=TRUE)
 
 
-#reconstructing a merged data frame out of the combined runs
+#reconstructing a merged data frame out of the combined runs to create an average run for runs 3 to 7
 step.success.data.merged = get.merged.step.succes.data(step.success.data.allruns)
 
