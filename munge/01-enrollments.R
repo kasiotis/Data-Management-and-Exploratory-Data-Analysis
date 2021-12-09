@@ -108,6 +108,8 @@ get.graduate.gender.data.merged = function(allgenders) {
   return(
     data.frame(
       gender = unique(allgenders$gender),
+      enrollments = all.gender.enrollments,
+      graduations = all.gender.graduations,
       grad.percent = all.gender.graduations/all.gender.enrollments*100
     )
   )
@@ -188,6 +190,8 @@ get.graduate.country.data.merged = function(allcountries){
   return(
     data.frame(
       country = unique(allcountries$country),
+      enrollments = all.country.enrollments,
+      graduations = all.country.graduations,
       grad.percent = all.country.graduations/all.country.enrollments*100
     )
   )
@@ -270,6 +274,8 @@ get.graduate.age.data.merged = function(allages) {
    return(
      data.frame(
        age = unique(allages$age.range),
+       enrollments = all.age.enrollments,
+       graduations = all.age.graduations,
        grad.percent = all.age.graduations/all.age.enrollments*100
      )
    )
@@ -349,6 +355,8 @@ get.graduate.employment.data.merged = function(allemployments){
   return(
     data.frame(
       employment.status = unique(allemployments$employment.status),
+      enrollments = all.employment.enrollments,
+      graduations = all.employment.graduations,
       grad.percent = all.employment.graduations/all.employment.enrollments*100
     )
   )
@@ -427,6 +435,8 @@ get.graduate.education.data.merged = function(alleducations){
   return(
     data.frame(
       education.status = unique(alleducations$education.status),
+      enrollments = all.education.enrollments,
+      graduations = all.education.graduations,
       grad.percent = all.education.graduations/all.education.enrollments*100
     )
   )

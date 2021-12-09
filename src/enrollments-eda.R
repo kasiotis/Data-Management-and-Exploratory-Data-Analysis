@@ -46,9 +46,19 @@ age.grad.crossrun.plot = function(){
 
 age.grad.crossrun.plot()
 
+#producing a plot for the total number of enrollments categorized by age group
+age.enrolled.merged.plot = function(){
+  barplot(grad.age.data.merged$enrollments, names=grad.age.data.merged$age, xlab = "Age group", ylab = "Number of Enrollments",
+          main = "Total number of enrollments categorized by age group")
+}
+age.enrolled.merged.plot()
+
 #plotting all the age ranges of the learners against their respective graduate percentage (merged version of the 7 runs)
-(age.grad.merged.plot = ggplot(grad.age.data.merged, aes(x = age, y = grad.percent))+
-    geom_line(aes(group = 1), color=7))
+age.grad.merged.plot = function(){
+  barplot(grad.age.data.merged$grad.percent, names=grad.age.data.merged$age, xlab = "Age group", ylab = "Percentage of Graduates",
+          main = "Percentage of Graduates categorized by age group")
+}
+age.grad.merged.plot()  
 
 
 
@@ -83,11 +93,27 @@ country.grad.crossrun.plot = function(){
 
 country.grad.crossrun.plot() ### this plot ended up being unfruitful
 
+#producing a plot for the total number of enrollments categorized by country
+country.enrolled.merged.plot = function(){
+  barplot(grad.country.data.merged$enrollments, names=grad.country.data.merged$country, xlab = "Countries", ylab = "Number of Enrollments",
+          main = "Total number of enrollments categorized by country", axis.lty = 1, cex.names = 0.45)
+}
+country.enrolled.merged.plot()
+
 #plotting all the countries of origin of the learners against their respective graduate percentage.
 #doing this for a merged version of all 7 runs to make it easier to plot, but also avoid bias towards
 #countries that might have a smaller number of enrollments in a single run
-(country.grad.merged.plot = ggplot(grad.country.data.merged, aes(x = country, y = grad.percent))+
-  geom_line(aes(group = 1), color=7)) ## this plot is not very clear to see what is going on
+country.grad.merged.plot = function(){
+  barplot(grad.country.data.merged$grad.percent, names=grad.country.data.merged$country, xlab = "Country", ylab = "Percentage of Graduates",
+          main = "Percentage of Graduates categorized by Country", axis.lty = 1, cex.names = 0.45)
+} ## this plot is not very clear to see what is going on
+country.grad.merged.plot()
+
+#finding the countries with the most enrollments
+best.countries.enrollment = grad.country.data.merged[grad.country.data.merged$enrollments>600,1:2]
+#ordering those countries by the number of their enrollments
+(best.countries.enrollment = best.countries.enrollment[order(best.countries.enrollment$enrollments, decreasing = TRUE),])
+
 
 #plotting all the countries of origin of the learners against their respective graduate percentage, for a merged version of all 7 runs
 #but only displaying the countries where the graduation percentage was greater than or equal to 15%
@@ -95,11 +121,10 @@ country.grad.crossrun.plot() ### this plot ended up being unfruitful
   geom_line(aes(group = 1), color=7)) ## this plot is much clearer and understandable
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the country of origin of the learners
-best.countries.crossrun = grad.country.data.allruns[(grad.country.data.allruns$graduate.percentage>20 &
-                                                        grad.country.data.allruns$enrollements >10),]
+best.countries.crossrun = grad.country.data.merged[(grad.country.data.merged$grad.percent>10 & grad.country.data.merged$enrollments>10),]
 
 #reordering the countries according to their graduation percentage (from high to low) and showing only the top 4
-(best.countries.crossrun = head(best.countries.crossrun[order(best.countries.crossrun$graduate.percentage, decreasing = TRUE),],4))
+(best.countries.crossrun = head(best.countries.crossrun[order(best.countries.crossrun$grad.percent, decreasing = TRUE),],5))
 
 
 
@@ -136,9 +161,19 @@ education.grad.crossrun.plot = function(){
 
 education.grad.crossrun.plot()
 
+#producing a plot for the total number of enrollments categorized by education
+education.enrolled.merged.plot = function(){
+  barplot(grad.education.data.merged$enrollments, names=grad.education.data.merged$education.status, xlab = "education", ylab = "Number of Enrollments",
+          main = "Total number of enrollments categorized by education", axis.lty = 1, cex.names = 0.65)
+}
+education.enrolled.merged.plot()
+
 #plotting all the educational backgrounds of the learners against their respective graduate percentage average of all runs
-(education.grad.merged.plot = ggplot(grad.education.data.merged, aes(x = education.status, y = grad.percent))+
-    geom_line(aes(group = 1), color=7))
+education.grad.merged.plot = function(){
+  barplot(grad.education.data.merged$grad.percent, names=grad.education.data.merged$education.status, xlab = "Education", ylab = "Percentage of Graduates",
+          main = "Percentage of Graduates categorized by Education", axis.lty = 0.45)
+}
+education.grad.merged.plot()
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the background education of the learners
 best.education.crossrun = grad.education.data.allruns[(grad.education.data.allruns$graduate.percentage>20 &
@@ -180,9 +215,19 @@ employment.grad.crossrun.plot = function(){
 
 employment.grad.crossrun.plot()
 
+#producing a plot for the total number of enrollments categorized by employment
+employment.enrolled.merged.plot = function(){
+  barplot(grad.employment.data.merged$enrollments, names=grad.employment.data.merged$employment.status, xlab = "employment", ylab = "Number of Enrollments",
+          main = "Total number of enrollments categorized by employment", axis.lty = 1, cex.names = 0.65)
+}
+employment.enrolled.merged.plot()
+
 #plotting all the employments of the learners against their respective graduate percentage average of all runs
-(employment.grad.merged.plot = ggplot(grad.employment.data.merged, aes(x = employment.status, y = grad.percent))+
-    geom_line(aes(group = 1), color=7))
+employment.grad.merged.plot = function(){
+  barplot(grad.employment.data.merged$grad.percent, names=grad.employment.data.merged$employment.status, xlab = "Employment", ylab = "Percentage of Graduates",
+          main = "Percentage of Graduates categorized by Employment", axis.lty = 0.45)
+}
+employment.grad.merged.plot()
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the employment of the learners
 best.employment.crossrun = grad.employment.data.allruns[(grad.employment.data.allruns$graduate.percentage>20 &
@@ -224,9 +269,19 @@ gender.grad.crossrun.plot = function(){
 
 gender.grad.crossrun.plot()
 
+#producing a plot for the total number of enrollments categorized by gender
+gender.enrolled.merged.plot = function(){
+  barplot(grad.gender.data.merged$enrollments, names=grad.gender.data.merged$gender, xlab = "gender", ylab = "Number of Enrollments",
+          main = "Total number of enrollments categorized by gender", axis.lty = 1, cex.names = 0.65)
+}
+gender.enrolled.merged.plot()
+
 #plotting all the educational backgrounds of the learners against their respective graduate percentage average of all runs
-(gender.grad.merged.plot = ggplot(grad.gender.data.merged, aes(x = gender, y = grad.percent))+
-    geom_line(aes(group = 1), color=7))
+gender.grad.merged.plot = function(){
+  barplot(grad.gender.data.merged$grad.percent, names=grad.gender.data.merged$gender, xlab = "Gender", ylab = "Percentage of Graduates",
+          main = "Percentage of Graduates categorized by Gender", axis.lty = 0.45)
+}
+gender.grad.merged.plot()
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the gender of the learners
 best.gender.crossrun = grad.gender.data.allruns[(grad.gender.data.allruns$graduate.percentage>20 &

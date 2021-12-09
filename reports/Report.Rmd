@@ -123,6 +123,7 @@ Learner Background:
 Learner Performance:
 
 - Percentage of people who completed the course
+- Percentage of people who completed the course categorized by age, gender, education, country, employment.
 
 ### Verify Data Quality
 
@@ -336,3 +337,70 @@ To preprocess my information in order to create new data, I created two function
 
 # Data Analysis and results
 
+## Introduction
+
+My analysis was solely based off of my initial business questions and my Data mining goals. The business questions that I set out to investigate as part of this project included the Learner background, engagement and performance in this course. From the data sets which I had to work with for this project, I derived quite a few questions that could be investigated that concern the aforementioned business goals. These questions I decided to work with can be found in the "Data Exploration" section of this report along with a more detailed explanation of which data sets were used and why. The following sections will include explanations of the processes that were followed for my analysis and the results that were produced as part of it, as well as the cases were the analysis was not particularly fruitful. The structure of the analysis will be a step by step walk through of the work that was done for each of the data sets that I used.
+
+## Enrollments Dataset
+```{r include=FALSE}
+source("src/enrollments-eda.R", local = knitr::knit_global())
+```
+
+For the enrollments data set I had stated that my investigation would look at the Learner background and the Learner performance. Below we can see two sections that detail the analysis and its results about these two business goals.
+
+When looking to investigate the learner background and performance of the course I set out to look at the following questions:
+
+Learner Background:
+
+- Number of people enrolled categorized by age, gender, education, country, employment.
+
+Learner Performance:
+
+- Percentage of people who completed the course
+- Percentage of people who completed the course categorized by age, gender, education, country, employment.
+
+### Enrollments and Graduation percentage based on age groups
+
+```{r echo=FALSE, fig.align = "center"}
+grad.age.data.merged[,1:4]
+```
+
+### Enrollments and Graduation percentage based on Gender
+
+```{r echo=FALSE, fig.align = "center"}
+grad.gender.data.merged[,1:4]
+```
+
+### Enrollments and Graduation percentage based on background education
+
+```{r echo=FALSE, fig.align = "center"}
+grad.education.data.merged[,1:4]
+```
+
+### Enrollments and Graduation percentage based on employment
+
+```{r echo=FALSE, fig.align = "center"}
+grad.employment.data.merged[,1:4]
+```
+
+### Enrollments and Graduation percentage based on country of origin
+
+In order to make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging all runs and finding the sums of each variable. Essentially what that means is that the numbers of enrollments and graduations represent all seven runs, and so does the graduate percentage.
+
+In total there were learners from 200 different countries that enrolled in the course throughout the runs. The top 100 countries with the biggest number of enrollments can be seen below.
+
+```{r echo=FALSE, fig.align = "center"}
+best.countries.enrollment
+
+```
+
+To understand the performance of the learners from all the countries I will investigate the graduate percentage of countries that were more that 20%
+
+```{r fig.height=3 ,echo=FALSE}
+country.grad.merged.plot.best
+```
+To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 10 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and it happened that enough people graduated and brought the percentage up.
+
+```{r echo=FALSE, fig.align = "center"}
+best.countries.crossrun
+```

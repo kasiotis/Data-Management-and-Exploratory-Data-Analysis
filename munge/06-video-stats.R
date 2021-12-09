@@ -36,4 +36,4 @@ video.data.allruns = merge(merge(merge(merge(
 
 
 
-video.data.merged = get.video.data.merged(allvideos)
+video.data.merged = get.video.data.merged(video.data.allruns)
