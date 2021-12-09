@@ -38,9 +38,10 @@ age.grad.crossrun.plot = function(){
         grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==6], type = "l", col=6)
   lines(as.numeric(grad.age.data.allruns$age.range[grad.age.data.allruns$run==7]),
         grad.age.data.allruns$graduate.percentage[grad.age.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the age groups
   axis(1, at=1:length(grad.age.data.allruns$age.range[grad.age.data.allruns$run==1]),
        labels = grad.age.data.allruns$age.range[grad.age.data.allruns$run==1], cex.axis=0.7, cex.names=0.7)
-  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+  legend("topleft", legend = c("run1","run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
 }
 
 age.grad.crossrun.plot()
@@ -75,8 +76,9 @@ country.grad.crossrun.plot = function(){
         grad.country.data.allruns$graduate.percentage[grad.country.data.allruns$run==6], type = "l", col=6)
   lines(as.numeric(grad.country.data.allruns$country[grad.country.data.allruns$run==7]),
         grad.country.data.allruns$graduate.percentage[grad.country.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the countries
   axis(1, at=1:length(grad.country.data.merged$country), labels = grad.country.data.merged$country, cex.axis=0.7, cex.names=0.7)
-  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+  legend("topleft", legend = c("run1","run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
 }
 
 country.grad.crossrun.plot() ### this plot ended up being unfruitful
@@ -88,9 +90,9 @@ country.grad.crossrun.plot() ### this plot ended up being unfruitful
   geom_line(aes(group = 1), color=7)) ## this plot is not very clear to see what is going on
 
 #plotting all the countries of origin of the learners against their respective graduate percentage, for a merged version of all 7 runs
-#but only displaying the countries where the graduation percentage was greater than or equal to 20%
+#but only displaying the countries where the graduation percentage was greater than or equal to 15%
 (country.grad.merged.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+
-  geom_line(aes(group = 1), color=7)) ## this plot is much clearer and understandable ()
+  geom_line(aes(group = 1), color=7)) ## this plot is much clearer and understandable
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the country of origin of the learners
 best.countries.crossrun = grad.country.data.allruns[(grad.country.data.allruns$graduate.percentage>20 &
@@ -107,6 +109,7 @@ best.countries.crossrun = grad.country.data.allruns[(grad.country.data.allruns$g
 
 
 #plotting the background education of the learners against their respective graduate percentage (all runs)
+#each line represents a single run.
 education.grad.crossrun.plot = function(){
   
   plot(as.numeric(grad.education.data.allruns$education.status[grad.education.data.allruns$run==1]),
@@ -125,9 +128,10 @@ education.grad.crossrun.plot = function(){
         grad.education.data.allruns$graduate.percentage[grad.education.data.allruns$run==6], type = "l", col=6)
   lines(as.numeric(grad.education.data.allruns$education.status[grad.education.data.allruns$run==7]),
         grad.education.data.allruns$graduate.percentage[grad.education.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the education status
   axis(1, at=1:length(grad.education.data.merged$education.status), labels = grad.education.data.merged$education.status, 
        cex.axis=0.7, cex.names=0.7)
-  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+  legend("topleft", legend = c("run1","run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
 }
 
 education.grad.crossrun.plot()
@@ -168,9 +172,10 @@ employment.grad.crossrun.plot = function(){
         grad.employment.data.allruns$graduate.percentage[grad.employment.data.allruns$run==6], type = "l", col=6)
   lines(as.numeric(grad.employment.data.allruns$employment.status[grad.employment.data.allruns$run==7]),
         grad.employment.data.allruns$graduate.percentage[grad.employment.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the employment status
   axis(1, at=1:length(grad.employment.data.merged$employment.status), labels = grad.employment.data.merged$employment.status, 
        cex.axis=0.7, cex.names=0.7)
-  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+  legend("topleft", legend = c("run1","run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
 }
 
 employment.grad.crossrun.plot()
@@ -188,7 +193,7 @@ best.employment.crossrun = grad.employment.data.allruns[(grad.employment.data.al
 
 
 #############################################################################################################
-###########################  Analysis on the gender of learners  ###########################################
+###########################  Analysis on the gender of learners  ############################################
 #############################################################################################################
 
 
@@ -211,9 +216,10 @@ gender.grad.crossrun.plot = function(){
         grad.gender.data.allruns$graduate.percentage[grad.gender.data.allruns$run==6], type = "l", col=6)
   lines(as.numeric(grad.gender.data.allruns$gender[grad.gender.data.allruns$run==7]),
         grad.gender.data.allruns$graduate.percentage[grad.gender.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the gender
   axis(1, at=1:length(grad.gender.data.merged$gender), labels = grad.gender.data.merged$gender, 
        cex.axis=0.7, cex.names=0.7)
-  legend("topleft", legend = c("run1","run1","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
+  legend("topleft", legend = c("run1","run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=1:7, text.font = 4)
 }
 
 gender.grad.crossrun.plot()

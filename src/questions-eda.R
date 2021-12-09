@@ -19,6 +19,7 @@ quiz.crossrun.plot = function(){
         quiz.data.allruns$success_percentage[quiz.data.allruns$run==6], type = "l", col=6)
   lines(1:length(quiz.data.allruns$quiz[quiz.data.allruns$run==7]),
         quiz.data.allruns$success_percentage[quiz.data.allruns$run==7], type = "l", col=7)
+  #changing the axis of the plot to represent the actual values of the quizzes
   axis(1, at=1:5, labels = quiz.data.merged$quiz, cex.axis=0.7)
   legend("topleft", legend = c("run2","run3","run4","run5","run6","run7"), cex = 0.50, fill=2:7, text.font = 4)
 }
