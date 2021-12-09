@@ -117,11 +117,12 @@ best.countries.enrollment = grad.country.data.merged[grad.country.data.merged$en
 
 #plotting all the countries of origin of the learners against their respective graduate percentage, for a merged version of all 7 runs
 #but only displaying the countries where the graduation percentage was greater than or equal to 15%
-(country.grad.merged.plot.best = ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+
-  geom_line(aes(group = 1), color=7)) ## this plot is much clearer and understandable
+(country.grad.merged.plot.best = 
+    ggplot(grad.country.data.merged[grad.country.data.merged$grad.percent>=15,], aes(x = country, y = grad.percent))+ geom_line(aes(group = 1), color=7)) +
+  labs(y= "Country", x = "Graduate Percentage", title = "Graduate Percentage of countries with more that 15%")  ## this plot is much clearer and understandable
 
 #finding the best graduate percentage (more that 20%) throughout all runs according to the country of origin of the learners
-best.countries.crossrun = grad.country.data.merged[(grad.country.data.merged$grad.percent>10 & grad.country.data.merged$enrollments>10),]
+best.countries.crossrun = grad.country.data.merged[(grad.country.data.merged$grad.percent>10 & grad.country.data.merged$enrollments>15),]
 
 #reordering the countries according to their graduation percentage (from high to low) and showing only the top 4
 (best.countries.crossrun = head(best.countries.crossrun[order(best.countries.crossrun$grad.percent, decreasing = TRUE),],5))

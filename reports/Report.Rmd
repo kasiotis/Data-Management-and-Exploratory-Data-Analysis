@@ -346,18 +346,26 @@ My analysis was solely based off of my initial business questions and my Data mi
 source("src/enrollments-eda.R", local = knitr::knit_global())
 ```
 
-For the enrollments data set I had stated that my investigation would look at the Learner background and the Learner performance. Below we can see two sections that detail the analysis and its results about these two business goals.
+For the enrollments data set I had stated that my investigation would look at the Learner background and the Learner performance. Below we can see two sections that detail the analysis and its results about these two business goals. In order to make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging all runs and finding the sums of each variable. Essentially what that means is that the numbers of enrollments and graduations represent all seven runs, and so does the graduate percentage.
 
 When looking to investigate the learner background and performance of the course I set out to look at the following questions:
 
 Learner Background:
 
-- Number of people enrolled categorized by age, gender, education, country, employment.
+- Number of enrollments categorized by age, gender, education, country, employment.
 
 Learner Performance:
 
 - Percentage of people who completed the course
 - Percentage of people who completed the course categorized by age, gender, education, country, employment.
+
+### Enrollments and Graduation percentage in all runs
+
+```{r echo=FALSE, fig.align = "center"}
+grad.general.data
+```
+
+The first thing we can see is that the learners did considerably better in terms of performance in run 1, with a graduation percentage of 12.5%. Whereas, in the rest of the runs only less that 4% completed the course. Additionally, the number of enrollments was decreasing as the runs went on. This means that not a lot people were signing up for the course.
 
 ### Enrollments and Graduation percentage based on age groups
 
@@ -365,11 +373,15 @@ Learner Performance:
 grad.age.data.merged[,1:4]
 ```
 
+By observing the estimates for enrollments and graduations by age groups we see that the is a significant amount of people that did not provide any information about their age which may affect the reliability of the analysis. However, from the data that we have we see that the age groups with the most enrollments is that of 26-35. This is the group which seems to show the most interest in the course. Their performance however is mediocre, with just 8.8% graduating the course. The best performers were surprisingly the people who were over 65 years old, with an average across runs graduate percentage of 22.9%. When also looking at the rest of the age groups we can see that there may be a trend in our results. It seems that the age groups go down (the younger the learner), the smaller the percentage of graduates. 
+
 ### Enrollments and Graduation percentage based on Gender
 
 ```{r echo=FALSE, fig.align = "center"}
 grad.gender.data.merged[,1:4]
 ```
+
+In regards to gender we seem to have the same issue that might affect the reliability of the results. Just as with the age groups, where we have a significant amount of learners that did not declare their gender. From looking at the table above, the first thing we see is that by slight majority the gender with the most enrollments is that of males, with 2233 learners across runs. The gender with the best performance in regards to graduations is also the males, with an average rate of 14% graduating the course.
 
 ### Enrollments and Graduation percentage based on background education
 
@@ -377,30 +389,51 @@ grad.gender.data.merged[,1:4]
 grad.education.data.merged[,1:4]
 ```
 
+In terms of previous education, we also see the same issues as before with the unrecorded entries. Apart from that, the data shows us that there is strong interest in the course by people with a university degree, with 1729 people having one. The university graduates actually also performed quite well with a graduation rate of 13.7%. When it comes to the best performance though it seems that there are two groups of people that performed a little bit better, the professionals and those with a university doctorate, both with a 15% graduation rate. This indicates just how useful it can be for a learner to have professional experience. The people who performed the worst were those who had an apprenticeship as a background education, having 0% graduation percentage.
+
 ### Enrollments and Graduation percentage based on employment
 
 ```{r echo=FALSE, fig.align = "center"}
-grad.employment.data.merged[,1:4]
+grad.employment.data.merged
 ```
+
+In terms of employment, we once again see the same issue with the unknown entries. When looking at the information that we have, we see that the people who were most interested in the course are those who are working full time, with 1402 people enrolling in the course across the runs, double the number of the second most interested group. The best performing group was the retired people with a 22.4% graduation rate. This makes sense because as we saw earlier, the over 65 were also the best performers in terms of age groups. The full time students were the ones that performed the worst, with 4.7% graduation rate.
 
 ### Enrollments and Graduation percentage based on country of origin
 
-In order to make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging all runs and finding the sums of each variable. Essentially what that means is that the numbers of enrollments and graduations represent all seven runs, and so does the graduate percentage.
-
-In total there were learners from 200 different countries that enrolled in the course throughout the runs. The top 100 countries with the biggest number of enrollments can be seen below.
+In total there were learners from 200 different countries that enrolled in the course throughout the runs. The top 10 countries with the biggest number of enrollments have been extracted and are shown below.
 
 ```{r echo=FALSE, fig.align = "center"}
 best.countries.enrollment
 
 ```
 
-To understand the performance of the learners from all the countries I will investigate the graduate percentage of countries that were more that 20%
+We see that Great Britain, India and the US are dominate the ranks of the countries from which the learner came from for this course. Learners from these 10 countries have shown the greatest interest in enrolling in the course. Additionally, we also see that the unknown entries are again quite a lot, causing the same issue as with the other metrics.
+
+To effectively understand the performance of the learners from all the countries I will investigate the graduate percentage of countries that were more that 20%.
 
 ```{r fig.height=3 ,echo=FALSE}
 country.grad.merged.plot.best
 ```
-To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 10 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and it happened that enough people graduated and brought the percentage up.
+
+Above we can see 11 countries with more than 20% graduation rate. However, after further inspecting these countries I have discovered that some of them had really small number of enrollments, which can cause the graduate percentage to spike with just a few graduates. To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 15 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and also bringing in countries were the graduate rate was above the overage of run 1 which was the best one (run 1 is acting as a benchmark).
 
 ```{r echo=FALSE, fig.align = "center"}
 best.countries.crossrun
 ```
+
+In the list above we see a very detailed table of the countries with the best performers. Lets take a look at the top 3. At the first place we see Cyprus, with a more significant amount of enrollments, namely 30 but and an excellent graduate rate of just over 23%. In the second place is Greece with a much most significant number of enrollments, 197 learners and a close to average graduate rate of 12.6%. At the third place we see Angola, with 24 enrollments and a graduate rate similar to Greece at 12.5%. After that we see that the rest of the countries start to fall below the the best performing run, but still having a good overall rate.
+
+### Conclusion
+
+The analysis from the enrollments dataset provides us with some really useful information about the characteristics of learners and their performance. To bring everything into a short summary lets create some profiles of the learners that showed the most interest in the course and those that performed the best.
+
+Most Interested:
+
+The characteristics of the learners that were the most interested in the course are that of a male, between the ages of 26 to 35, with a university degree, who has a full time job and those that are from either the UK, USA or India.
+
+Best Performer:
+
+The characteristics of the learners that were the best performers in the course are primarily that of a males, people above 65, either a doctorate or professional, people who are retired and people who are from Cyprus, Greece and Angola
+
+## Leaving surevey response dataset
