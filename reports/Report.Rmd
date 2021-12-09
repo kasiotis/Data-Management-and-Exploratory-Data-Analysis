@@ -147,8 +147,8 @@ In the snippet above we can see that eight metrics were recorded for this data s
 
 Engagement:
 
--	Percentages of the leaving reasons.
--	Further investigate the trends among steps (if relevant to the course) at which they left.
+-	Percentages of the leaving reasons for which learners left.
+-	Percentages of the leaving steps at which learners left.
 
 ### Verify Data Quality
 
@@ -437,3 +437,34 @@ Best Performer:
 The characteristics of the learners that were the best performers in the course are primarily that of a males, people above 65, either a doctorate or professional, people who are retired and people who are from Cyprus, Greece and Angola
 
 ## Leaving surevey response dataset
+```{r include=FALSE}
+source("src/leaving-survey-responses-eda.R", local = knitr::knit_global())
+```
+
+To make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging all runs and producing the means of each variable I was investigating. When looking to investigate the learner engagement of the course I set out to look at the following questions for this dataset:
+
+-	Percentages of the leaving reasons for which learners left.
+-	Percentages of the leaving steps at which learners left.
+
+In both the leaving steps and reasons I have only used the datasets from runs 4 to 7 because of the differences in the previous runs and the difficulty in merging sets with different steps.
+
+### Leaving Steps
+
+```{r echo=FALSE, fig.align = "center",  fig.width=11}
+leaving.step.merged.plot()
+```
+
+The numbers that represent the steps are slightly modified. The hundreds represent the week and the rest of the number is the step number. The step at which by far the most students left is step 320 with more than 11 people leaving on average. This is really surprising since step 320 is the last step in the course. The second most usual one is 113 and then 119 which are in the middle and at the end of week 1 respectively.
+
+### Leaving Reasons
+
+```{r echo=FALSE, fig.align = "center", fig.width=11, fig.height=5}
+leaving.reason.merged.plot()
+```
+
+When we look at the leaving reasons it is clear that most people either mentioned that they don't have enough time or that the course required more time that they thought, which both are very similar since they are both referring to time limitations. Therefore it is safe to say that the course would benefit by being faster. To further inspect just how much time the course it taking students, I will next look at the step activity dataset which hold information about the duration of each step.
+
+## Step Activity dataset
+```{r include=FALSE}
+source("src/step-activity-eda.R", local = knitr::knit_global())
+```
