@@ -1,18 +1,6 @@
-# template
+# Instruction Manual
 
-Welcome to ProjectTemplate!
-
-This file introduces you to ProjectTemplate, but you should eventually replace
-the contents of this file with an introduction to your project. People who
-work with your data in the future will thank you for it, including your future
-self.
-
-ProjectTemplate is an R package that helps you organize your statistical
-analysis projects. Since you're reading this file, we'll assume that you've
-already called `create.project()` to set up this project and all of its
-contents.
-
-To load your new project, you'll first need to `setwd()` into the directory
+To load this project, you'll first need to `setwd()` into the directory
 where this README file is located. Then you need to run the following two
 lines of R code:
 
@@ -26,14 +14,13 @@ messages as ProjectTemplate goes about doing its work. This work involves:
 * Reading in any datasets stored in `data` or `cache`.
 * Preprocessing your data using the files in the `munge` directory.
 
-Once that's done, you can execute any code you'd like. For every analysis
-you create, we'd recommend putting a separate file in the `src` directory.
-If the files start with the two lines mentioned above:
+Once that's done, you can execute any of the analysis filese in the `src` 
+directory. Before running any of the analysis files please make sure to
+call the function called load.project().
 
-	library('ProjectTemplate')
-	load.project()
-
-You'll have access to all of your data, already fully preprocessed, and
-all of the libraries you want to use.
-
-For more details about ProjectTemplate, see http://projecttemplate.net
+Additionally, in orderd for the pre-processing to work you may need to
+install some packages that were used. To do that, you can go into these files
+in the `munge` folder from were you can see all the libraries that get imported.
+To install these libraries please use the `install.packages('LibraryName')` 
+function along with the name of the libraries you do not currently have
+already installed on your device.

@@ -46,24 +46,23 @@ The main requirement is to use some or all of the provided sets of data to creat
 
 Multiple assumptions will have to be made as part of this project in terms of indicating the business objectives. Since I am not in contact with the company to discuss the aims and goals of the analysis with these data sets, I will have to determine some business objectives which I deem important and useful to investigate within the data sets.
 
-The constraints face by the exploratory analysis are multiple. Firstly, the eight aforementioned data sources were not recorded for every run, in some runs only a small number of sources were recorded which limits our ability to effectively compare these runs in term of each source of recorded data. Another constraint is various data sets, there are entries with missing values for various variables. This is a problem because it means that the samples, we can extract for some variables are not really representative of the whole dataset.
-
+The constraints faced by the exploratory analysis are multiple. Firstly, the eight aforementioned data sources were not recorded for every run, in some runs only a small number of sources and/or entries were recorded which limits our ability to effectively compare these runs in term of each source of recorded data. Another constraint is that is various data sets there are entries with missing values for various variables. This is a problem because it means that the samples from which we can extract for some variables are not really representative of the whole dataset and any such finding may be unreliable.
 
 ## Determine data mining goals
 
 ### Goals
 
 1. Learner Background:
-- Finding the educational background and personal characteristics of the learners
-- Finding if and how their background and characteristics affected their learning 
+- Finding the educational background and personal characteristics of the learners.
+- Finding if and how their background and characteristics affected their learning.
 
 2. Learner Engagement:
-- Finding methods to quantify the engagement of the students with the course.
-- Finding where their engagement was attributed
+- Finding methods to quantify the engagement of the students within the course.
+- Finding where their engagement was attributed.
 
 3. Learner Performance:
-- Finding how the students performed in this course
-- Finding where their performance was attributed
+- Finding how the students performed in this course.
+- Finding where their performance was attributed.
 
 ### Success Criteria
 
@@ -77,7 +76,7 @@ The successfulness of my data mining project is dependent on the a variety of cr
 
 ### Plan
 
-My plan for this project is going to be based around the steps that formulate the CRISP-DM methodology. To begin with, I will look at all eight data sources methodically to try and understand what it is that lays within each set and how it can be used. I will discuss how the data composition and how the methods that they can be manipulated to best extract answers for my data mining goals. Furthermore, I look for issues with the data that need cleaning and reformatting, this will be done to verify its quality before moving on to the next steps. From there on, I will commence by picking out the data that is relevant to my data mining goals and work exclusively with that. I will clean that data, construct new records of it, merge it with other pre-existing data and reformat it wherever necessary so that it is ready for use by the models I am going to build. The next step is to take advantage for these newly prepared data sources to help me build my suite of reproducible models for analysis regarding the data mining goals.
+My plan for this project is going to be based around the steps that formulate the CRISP-DM methodology. To begin with, I will look at all eight data sources methodically to try and understand what it is that lays within each set and how it can be used. I will discuss the data composition and how the methods that they can be used to best extract answers for my data mining questions. Furthermore, I will commence by picking out the data that is relevant to my data mining goals and work exclusively with that. From there on I look for issues with the data that need cleaning and reformatting, this will be done to verify its quality before moving on to the next steps. I will clean that data, construct new records of it, merge it with other pre-existing data and reformat it wherever necessary so that it is ready for analysis. The next step is to take advantage for these newly prepared data sources to help me build my suite of reproducible models for analysis which will address my data mining goals.
 
 ### Assessment of tools and techniques
 
@@ -107,8 +106,7 @@ This data set has been recorded for all seven runs and it is a data set that hol
 
 ### Explore Data
 
-To further explore the contents of this data set we can see below a few rows with their respective column names.
-
+To further explore the contents of this data set we can see below a few rows along with their respective column names.
 ```{r}
 str(cyber.security.7_enrolments, strict.width = "wrap", vec.len=2)
 ```
@@ -130,12 +128,11 @@ In this data set we see that some columns have a lot of empty cells or cells tha
 
 ## Leaving survey response Dataset
 
-This data set has been recorded for all seven runs and is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning.
+This data set has been properly recorded for runs 4 to 7 and is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning curriculum.
 
 ### Explore Data
 
-To further explore the contents of this data set we can see below a few rows with their respective column names.
-
+To further explore the contents of this data set we can see below a few rows along with their respective column names.
 ```{r}
 str(cyber.security.7_leaving.survey.responses, strict.width = "wrap", vec.len=2)
 ```
@@ -148,17 +145,16 @@ Engagement:
 
 ### Verify Data Quality
 
-The data set has a many NA values in last four columns. Additionally, we can also see that the column "leaving_reason" has some written errors.
+The data set has a many NA values in the last four columns. Additionally, we can also see that the column "leaving_reason" has some non-UTF characters.
 
 
 ## Weekly sentiment survey Dataset
 
-This data set has been recorded for all seven runs and it hold information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
+This data set has been recorded for all seven runs and it holds information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
 
 ### Explore Data
 
 To further explore the contents of this data set we can see below a few rows with their respective column names.
-
 ```{r}
 str(cyber.security.7_weekly.sentiment.survey.responses, strict.width = "wrap", vec.len=2)
 ```
@@ -170,7 +166,7 @@ Learner Engagement:
 
 ### Verify Data Quality
 
-The quality of this data set seems to be fine. The only thing that may be a problem is that not all students have given a reason for their rating. However this is something that can be bypassed if we simply ignore that "reason" column.
+The quality of this data set seems to be fine. The only thing that may be a problem is that not all students have given a reason for their rating.
 
 ## Question response Dataset
 
@@ -178,8 +174,7 @@ This data set has been recorded for all seven runs and it includes information a
 
 ### Explore Data
 
-To further explore the contents of this data set we can see below a few rows with their respective column names.
-
+To further explore the contents of this data set we can see below a few rows along with their respective column names.
 ```{r}
 str(cyber.security.7_question.response, strict.width = "wrap", vec.len=2)
 ```
@@ -201,7 +196,6 @@ This data set has been recorded for all seven runs and is holding information ab
 ### Explore Data
 
 To further explore the contents of this data set we can see below a few rows with their respective column names.
-
 ```{r}
 str(cyber.security.7_step.activity, strict.width = "wrap", vec.len=2)
 ```
@@ -211,7 +205,7 @@ Learner Engagement:
 
 -	Percentage of learners that completed each step
 -	The time it took to complete each step
-- The difference of both across the runs
+- The difference of both metrics across the runs
 
 ### Verify Data Quality
 
@@ -221,7 +215,7 @@ Overall the data set looks to be of good quality. However, I have spotted that t
 #against the actual recorded step number to see if the data is correct
 plot(cyber.security.7_step.activity$step_number,cyber.security.7_step.activity$step, xlab = "Step number", ylab = "Step column")
 ```
-By looking at the plot above we clearly see that the step numbers are not correctly recorded in the "step" column.
+By looking at the plot above we clearly see that the step numbers are not correctly recorded in the "step" column. All values of step number below 10 get recorded at the wrong position after the dot.
 
 ## Video stats Dataset
 
@@ -229,8 +223,7 @@ This data set has only been recorded for runs three to seven and it holds statis
  
 ### Explore Data
 
-To further explore the contents of this data set we can see below a few rows with their respective column names.
-
+To further explore the contents of this data set we can see below a few rows along with their respective column names.
 ```{r}
 str(cyber.security.7_video.stats, strict.width = "wrap", vec.len=2)
 ```
@@ -251,7 +244,6 @@ This data set was recorded for all seven runs and it holds the responses of the 
 ### Explore Data
 
 To further explore the contents of this data set we can see below a few rows with their respective column names.
-
 ```{r}
 str(cyber.security.7_archetype.survey.responses, strict.width = "wrap", vec.len=2)
 ```
@@ -259,7 +251,7 @@ There are four columns in this set, threes character and one integer. There seem
 
 ### Verify Data Quality
 
-The data held in this set seems fine. Only thing to add is that it is empty in runs one and two.
+The data held in this set seems fine.
 
 ## Team members Dataset
 
@@ -268,7 +260,6 @@ This data set has been recorded for runs two to seven. The data stored in this s
 ### Explore Data
 
 To further explore the contents of this data set we can see below a few rows with their respective column names.
-
 ```{r}
 str(cyber.security.7_team.members, strict.width = "wrap", vec.len=2)
 ```
@@ -284,7 +275,7 @@ The personally identifiable pieces of information have been retracted from this 
 
 ## Data Selection
 
-The data sources that I am going to include are the ones that can provide me with the most relevant and useful information regarding my business objectives. To extract that information I am going to have to work with a variety of data sources. The data sources which I have found to be the most relevant for informing the engagement, performance and background of the learners are the data sets of enrollments, leaving survey response, weekly sentiment survey, quiz performance, step attendance, video coverage. The only ones that I am going to exclude are the archtype survey responses and team members as they do not hold any data that would help me address my business goals.
+The data sources that I am going to include are the ones that can provide me with the most relevant and useful information regarding my business objectives. To extract that information I am going to have to work with a variety of data sources. The data sources which I have found to be the most relevant for informing the engagement, performance and background of the learners are the data sets of enrollments, leaving survey response, weekly sentiment survey, quiz performance, step attendance, video coverage. The only ones that I am going to exclude are the archtype survey responses and team members as they do not hold any data that would help me address my business goals. The columns which I am going to be using for each of my sets has been mentioned in the previous section where I explain how I plan on using each set to extract information that informs my business question.
 
 ## Data preprocessing, cleaning, merging and constructing
 
@@ -309,12 +300,16 @@ This particular data set is actually ready for analysis as it is. It does not re
 ### Step Activity Dataset
 
 As we saw in the previous chapter in the section of Verifying data quality, this particular data set had an issue with the column labeled as "step". To solve this issue in a reproducible and clean way I created a function that takes in a data set, modifies the step column and return a new clean dataset. The modification is essentially a re-calculation of the step column but this time the weeks are represented by the hundreds and the steps by the rest of the number.
-To prepare my data for the analyis I want to do, I created another function for this data set that again takes in a step.activity set and returns a new more concise and processed data frame. This data frame consists of all steps, the number of learner that started each step and the number that finished it, their completion percentage, and lastly the time it took them on average to complete each step. The returned data frame provides me with all of the information I need for my analysis in order to answer my data mining questions. To make things even easier, I called both functions together for all seven runs, to clean and preprocess my data so that it is ready for when I start my analysis.
+To prepare my data for the analysis I want to do, I created another function for this data set that again takes in a step.activity set and returns a new more concise and processed data frame. This data frame consists of all steps, the number of learner that started each step and the number that finished it, their completion percentage, and lastly the time it took them on average to complete each step. The returned data frame provides me with all of the information I need for my analysis in order to answer my data mining questions. To make things even easier, I called both functions together for all seven runs, to clean and preprocess my data so that it is ready for when I start my analysis.
 
 ### Leaving survey responses Dataset
 
 This dataset was in need of some clean before I could extract any data from it. To clean it I had to reformat and recalculate the "leaving_step" column just as before; by representing the weeks with the hundreds and the step number with the rest of the value. This was achieved by creating a function that took in a leaving survey responses data set and return a clean one with the aforementioned changes. The was one more issues with this dataset that I had to clean, that is the "leaving_reason" column which has some typos in a few of the reasons given. To fix this issues, I tried finding each one of these problematic reasons and changing their values to the proper piece of text. However, because the typos are not of UTF-8 type, the R language could not understand them and therefore I could not select them in order to change them. Therefore, to bypass this issue, I added another line of code in my cleaning method where I used the "stri_enc_toutf8" function that replaces non-UTF-8 characters with the "REPLACEMENT CHARACTER". I then when and replaced all my faulty reasons with their now searchable "REPLACEMENT CHARACTERS" for all their non_UTF-8 values and turned them into the correct piece of text for the leaving reasons.
 To preprocess my information in order to create new data, I created two functions in total. The first function takes in a leaving survey response data set and finds and returns the number of people that left at each step. The second function again takes in the same type of data set and returns the number of times each leaving reason was given by the learners.
+
+## Merging
+
+All newly constructed data sets that will derive from each run for each type of set will also have a merged version where I will have either a total or averaged version of all other runs for that particular type of set. That will be done so that analysis can be done for all available runs without having to use multiple sets. For comparisons between runs I am also going to create combined versions of each set that will hold all of the newly created information about all runs for each type of set.
 
 ---
 
@@ -354,7 +349,7 @@ The first thing we can see is that the learners did considerably better in terms
 ```{r echo=FALSE, fig.align = "center"}
 grad.age.data.merged[,1:4]
 ```
-By observing the estimates for enrollments and graduations by age groups we see that the is a significant amount of people that did not provide any information about their age which may affect the reliability of the analysis. However, from the data that we have we see that the age groups with the most enrollments is that of 26-35. This is the group which seems to show the most interest in the course. Their performance however is mediocre, with just 8.8% graduating the course. The best performers were surprisingly the people who were over 65 years old, with an average across runs graduate percentage of 22.9%. When also looking at the rest of the age groups we can see that there may be a trend in our results. It seems that the age groups go down (the younger the learner), the smaller the percentage of graduates. 
+By observing the estimates for enrollments and graduations by age groups we see that the is a significant amount of people that did not provide any information about their age which may affect the reliability of the analysis. However, from the data that we have we see that the age groups with the most enrollments is that of 26-35. This is the group which seems to show the most interest in the course. Their performance however is mediocre, with just 8.8% graduating the course. The best performers were surprisingly the people who were over 65 years old, with an average across runs graduate percentage of 22.9%. When also looking at the rest of the age groups we can see that there may be a trend in our results. It seems that as the age groups go down (the younger the learners), so does the percentage of graduates. 
 
 ### Enrollments and Graduation percentage based on Gender
 
@@ -385,19 +380,19 @@ In total there were learners from 200 different countries that enrolled in the c
 best.countries.enrollment
 
 ```
-We see that Great Britain, India and the US are dominate the ranks of the countries from which the learner came from for this course. Learners from these 10 countries have shown the greatest interest in enrolling in the course. Additionally, we also see that the unknown entries are again quite a lot, causing the same issue as with the other metrics.
+We see that Great Britain, India and the US dominate the ranks of the countries from which the learner came from for this course. Learners from these 10 countries have shown the greatest interest in enrolling in the course. Additionally, we also see that the unknown entries are again quite a lot, causing the same issue as with the other metrics.
 
 To effectively understand the performance of the learners from all the countries I will investigate the graduate percentage of countries that were more that 20%.
 
-```{r fig.height=2, fig.width= 7 ,echo=FALSE}
+```{r fig.height=1.5, fig.width= 7 ,echo=FALSE}
 country.grad.merged.plot.best
 ```
-Above we can see 11 countries with more than 20% graduation rate. However, after further inspecting these countries I have discovered that some of them had really small number of enrollments, which can cause the graduate percentage to spike with just a few graduates. To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 15 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and also bringing in countries were the graduate rate was above the overage of run 1 which was the best one (run 1 is acting as a benchmark).
+Above we can see 11 countries with more than 20% graduation rate. However, after further inspecting these countries I have discovered that some of them had really small number of enrollments, which can cause the graduate percentage to spike with just a few graduates. To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 15 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and also bringing in countries were the graduate rate was above the average of run 1 which was the best one (run 1 as a benchmark).
 
 ```{r echo=FALSE, fig.align = "center"}
 best.countries.crossrun
 ```
-In the list above we see a very detailed table of the countries with the best performers. Lets take a look at the top 3. At the first place we see Cyprus, with a more significant amount of enrollments, namely 30 but and an excellent graduate rate of just over 23%. In the second place is Greece with a much most significant number of enrollments, 197 learners and a close to average graduate rate of 12.6%. At the third place we see Angola, with 24 enrollments and a graduate rate similar to Greece at 12.5%. After that we see that the rest of the countries start to fall below the the best performing run, but still having a good overall rate.
+In the list above we see a very detailed table of the countries with the best performers. Lets take a look at the top 3. At the first place we see Cyprus, with a relatively significant amount of enrollments, namely 30 but and an excellent graduate rate of just over 23%. In the second place is Greece with a much most significant number of enrollments, 197 learners and a close to average graduate rate of 12.6%. At the third place we see Angola, with 24 enrollments and a graduate rate similar to Greece at 12.5%. After that we see that the rest of the countries start to fall below the the best performing run, but still having a good overall rate.
 
 ### Conclusion
 
@@ -424,7 +419,7 @@ To make it easier for me to get a better picture of what happend in all runs, I 
 
 ### Leaving Steps
 
-```{r echo=FALSE, fig.align = "center",  fig.width=11, fig.height=3.5}
+```{r echo=FALSE, fig.align = "center",  fig.width=11, fig.height=3}
 leaving.step.merged.plot()
 ```
 The numbers that represent the steps are slightly modified. The hundreds represent the week and the rest of the number is the step number. The step at which by far the most students left is step 320 with more than 11 people leaving on average. This is really surprising since step 320 is the last step in the course. The second most usual one is 113 and then 119 which are in the middle and at the end of week 1 respectively.
