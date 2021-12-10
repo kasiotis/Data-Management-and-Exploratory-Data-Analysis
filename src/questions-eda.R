@@ -1,6 +1,6 @@
 #load projTemp library
 library('ProjectTemplate')
-load.project()
+#load.project()
 
 
 #plotting the quizzes against their respective graduate percentage (runs 2-7)
@@ -28,10 +28,18 @@ quiz.crossrun.plot()
 
 
 #checking the success percentage of each quiz for all runs
-quiz.merged.plot = barplot(quiz.data.merged$success_percentage, axisnames = TRUE, names.arg = quiz.data.merged$quiz, col = rainbow(5), 
-                           ylim = c(0,100), xlab = "Steps", ylab = "Percentage of correct answers given", main = "Quiz/Test success percentage")
+quiz.merged.plot = function() {
+  barplot(quiz.data.merged$success_percentage, axisnames = TRUE, names.arg = quiz.data.merged$quiz, col = rainbow(5), 
+          ylim = c(0,100), xlab = "Steps", ylab = "Success Percentage", main = "Quiz/Test success percentage")
+}
+ 
 
 
 #checking the correlation of the number of questions and the percentage of success
-quiz.question.num.plot = plot(quiz.data.merged$number_of_questions, quiz.data.merged$success_percentage, xlab = "Number of Questions",
-                              ylab = "Succes Percentage", main = "The effect of number of questions on the Success Percentage")
+quiz.question.num.plot = function(){
+  plot(quiz.data.merged$number_of_questions, quiz.data.merged$success_percentage, xlab = "Number of Questions",
+       ylab = "Succes Percentage", main = "The effect of number of questions on the Success Percentage")
+  abline(lm(quiz.data.merged$success_percentage ~ quiz.data.merged$number_of_questions), col="red")
+}
+  
+

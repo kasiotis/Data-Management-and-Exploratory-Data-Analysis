@@ -23,7 +23,9 @@ get.weekly.sentiment.plot = function(weekly.sentiment.dataset) {
   # Remove English common stopwords
   docs <- tm_map(docs, removeWords, stopwords("english"))
   # specifying my stopwords as a character vector
-  docs <- tm_map(docs, removeWords, c("course")) 
+  docs <- tm_map(docs, removeWords, c("course", "cyber", "eye", "it's","need",
+                                      "lot", "security", "content", "just","language"
+                                      )) 
   # Remove punctuation
   docs <- tm_map(docs, removePunctuation)
   # Eliminate extra white spaces

@@ -103,8 +103,6 @@ The data was initially stored in a zip folder. This folder includes eight distin
 
 ## Enrolments Dataset
 
-### Describe Data
-
 This data set has been recorded for all seven runs and it is a data set that holds information about multiple characteristics of the learner such the time they enrolled in the course, the time they finished it, their previous education and much more.
 
 ### Explore Data
@@ -132,8 +130,6 @@ In this data set we see that some columns have a lot of empty cells or cells tha
 
 ## Leaving survey response Dataset
 
-### Describe Data
-
 This data set has been recorded for all seven runs and is tracking data about the learners that leave the course. It holds information about when they left, why they left and at which point in their learning.
 
 ### Explore Data
@@ -157,8 +153,6 @@ The data set has a many NA values in last four columns. Additionally, we can als
 
 ## Weekly sentiment survey Dataset
 
-### Describe Data
-
 This data set has been recorded for all seven runs and it hold information about the sentiment of the learners at the end of each week in their curriculum. The recorded data include the week of the survey, the rating given, the time of response and the reason for their rating.
 
 ### Explore Data
@@ -172,15 +166,13 @@ In the snippet above we can see the five metrics that were recorded in total. Th
 
 Learner Engagement:
 
-- How well was each week received by the learners?
+- How well was the course received by the learners?
 
 ### Verify Data Quality
 
 The quality of this data set seems to be fine. The only thing that may be a problem is that not all students have given a reason for their rating. However this is something that can be bypassed if we simply ignore that "reason" column.
 
 ## Question response Dataset
-
-### Describe Data
 
 This data set has been recorded for all seven runs and it includes information about quizzes that were taken by the students.  
 
@@ -196,7 +188,6 @@ In total we see that there are ten columns in this set. There are many interesti
 Learner Performance:
 
 -	Success rate for every quiz.
--	Success rate based on the week.
 - Success rate based on the number of questions
 
 ### Verify Data Quality
@@ -204,8 +195,6 @@ Learner Performance:
 The only issue with that can be immediately spotted with this data set is that the column "cloze_response" is almost completely empty.
 
 ## Step activity Dataset
-
-### Describe Data
 
 This data set has been recorded for all seven runs and is holding information about the curriculum of each week.
 
@@ -221,13 +210,13 @@ The are six metrics being recorded in this set, of which the two are integers, t
 Learner Engagement:
 
 -	Percentage of learners that completed each step
--	Percentage of learners that completed each week
-- Percentage of learners that completed each type of learning material
+-	The time it took to complete each step
+- The difference of both across the runs
 
 ### Verify Data Quality
 
 Overall the data set looks to be of good quality. However, I have spotted that the "step" column seems a little bit problematic, so lets investigate a bit further.
-```{r}
+```{r, fig.width=10, fig.height=3}
 #plotting the step (which consists of week number followed by a dot and then the step number)
 #against the actual recorded step number to see if the data is correct
 plot(cyber.security.7_step.activity$step_number,cyber.security.7_step.activity$step, xlab = "Step number", ylab = "Step column")
@@ -235,8 +224,6 @@ plot(cyber.security.7_step.activity$step_number,cyber.security.7_step.activity$s
 By looking at the plot above we clearly see that the step numbers are not correctly recorded in the "step" column.
 
 ## Video stats Dataset
-
-### Describe Data
 
 This data set has only been recorded for runs three to seven and it holds statistical metrics about the video material coverage of the learners.
  
@@ -249,7 +236,7 @@ str(cyber.security.7_video.stats, strict.width = "wrap", vec.len=2)
 ```
 In this set we have twenty-eight metrics being recorded in total. Most of these metrics are pre-calculated percentage statistics and are classed are numerical values. While there are also six integer classes that represent amounts of learners. Lastly, there is also one character column for the title of the video. The statistics show us many things such as the percentage of people that watched a certain amount of each video, the countries they watched from and some options they used while watching such as subtitles, hd video quality, etc. This data set can be exploited to answer the following questions:
 
-Engagement
+Learner Engagement:
 
 -	Percentage of video watched according to their duration.
 
@@ -258,8 +245,6 @@ Engagement
 This appears to be okay. There are however a few things we may assume about it. First is the duration watched by learners for each video cannot account for people that downloaded that video since however much they watched, they did offline. Second assumption is videos with high percentage of watching are those with at least 95%. The reason behind this is that people may pause and close the video just a few seconds before it ends if there is nothing more to watch.
 
 ## archtype survey responses
-
-### Describe Data
 
 This data set was recorded for all seven runs and it holds the responses of the learners about how they view themselves in regards to what archetype the feel like.
 
@@ -277,8 +262,6 @@ There are four columns in this set, threes character and one integer. There seem
 The data held in this set seems fine. Only thing to add is that it is empty in runs one and two.
 
 ## Team members Dataset
-
-### Describe Data
 
 This data set has been recorded for runs two to seven. The data stored in this set describe how the staff member teams were set up for the course.
 
@@ -364,7 +347,6 @@ Learner Performance:
 ```{r echo=FALSE, fig.align = "center"}
 grad.general.data
 ```
-
 The first thing we can see is that the learners did considerably better in terms of performance in run 1, with a graduation percentage of 12.5%. Whereas, in the rest of the runs only less that 4% completed the course. Additionally, the number of enrollments was decreasing as the runs went on. This means that not a lot people were signing up for the course.
 
 ### Enrollments and Graduation percentage based on age groups
@@ -372,7 +354,6 @@ The first thing we can see is that the learners did considerably better in terms
 ```{r echo=FALSE, fig.align = "center"}
 grad.age.data.merged[,1:4]
 ```
-
 By observing the estimates for enrollments and graduations by age groups we see that the is a significant amount of people that did not provide any information about their age which may affect the reliability of the analysis. However, from the data that we have we see that the age groups with the most enrollments is that of 26-35. This is the group which seems to show the most interest in the course. Their performance however is mediocre, with just 8.8% graduating the course. The best performers were surprisingly the people who were over 65 years old, with an average across runs graduate percentage of 22.9%. When also looking at the rest of the age groups we can see that there may be a trend in our results. It seems that the age groups go down (the younger the learner), the smaller the percentage of graduates. 
 
 ### Enrollments and Graduation percentage based on Gender
@@ -380,7 +361,6 @@ By observing the estimates for enrollments and graduations by age groups we see 
 ```{r echo=FALSE, fig.align = "center"}
 grad.gender.data.merged[,1:4]
 ```
-
 In regards to gender we seem to have the same issue that might affect the reliability of the results. Just as with the age groups, where we have a significant amount of learners that did not declare their gender. From looking at the table above, the first thing we see is that by slight majority the gender with the most enrollments is that of males, with 2233 learners across runs. The gender with the best performance in regards to graduations is also the males, with an average rate of 14% graduating the course.
 
 ### Enrollments and Graduation percentage based on background education
@@ -388,7 +368,6 @@ In regards to gender we seem to have the same issue that might affect the reliab
 ```{r echo=FALSE, fig.align = "center"}
 grad.education.data.merged[,1:4]
 ```
-
 In terms of previous education, we also see the same issues as before with the unrecorded entries. Apart from that, the data shows us that there is strong interest in the course by people with a university degree, with 1729 people having one. The university graduates actually also performed quite well with a graduation rate of 13.7%. When it comes to the best performance though it seems that there are two groups of people that performed a little bit better, the professionals and those with a university doctorate, both with a 15% graduation rate. This indicates just how useful it can be for a learner to have professional experience. The people who performed the worst were those who had an apprenticeship as a background education, having 0% graduation percentage.
 
 ### Enrollments and Graduation percentage based on employment
@@ -396,7 +375,6 @@ In terms of previous education, we also see the same issues as before with the u
 ```{r echo=FALSE, fig.align = "center"}
 grad.employment.data.merged
 ```
-
 In terms of employment, we once again see the same issue with the unknown entries. When looking at the information that we have, we see that the people who were most interested in the course are those who are working full time, with 1402 people enrolling in the course across the runs, double the number of the second most interested group. The best performing group was the retired people with a 22.4% graduation rate. This makes sense because as we saw earlier, the over 65 were also the best performers in terms of age groups. The full time students were the ones that performed the worst, with 4.7% graduation rate.
 
 ### Enrollments and Graduation percentage based on country of origin
@@ -407,21 +385,18 @@ In total there were learners from 200 different countries that enrolled in the c
 best.countries.enrollment
 
 ```
-
 We see that Great Britain, India and the US are dominate the ranks of the countries from which the learner came from for this course. Learners from these 10 countries have shown the greatest interest in enrolling in the course. Additionally, we also see that the unknown entries are again quite a lot, causing the same issue as with the other metrics.
 
 To effectively understand the performance of the learners from all the countries I will investigate the graduate percentage of countries that were more that 20%.
 
-```{r fig.height=3 ,echo=FALSE}
+```{r fig.height=2, fig.width= 7 ,echo=FALSE}
 country.grad.merged.plot.best
 ```
-
 Above we can see 11 countries with more than 20% graduation rate. However, after further inspecting these countries I have discovered that some of them had really small number of enrollments, which can cause the graduate percentage to spike with just a few graduates. To get an ever better picture of the list of the top performing countries while also avoiding bias, I will set a minimum amount of enrollments to be 15 and bring the graduate percentage threshold down to 10%. This helps avoid presenting cases where the number of enrollments was really small and also bringing in countries were the graduate rate was above the overage of run 1 which was the best one (run 1 is acting as a benchmark).
 
 ```{r echo=FALSE, fig.align = "center"}
 best.countries.crossrun
 ```
-
 In the list above we see a very detailed table of the countries with the best performers. Lets take a look at the top 3. At the first place we see Cyprus, with a more significant amount of enrollments, namely 30 but and an excellent graduate rate of just over 23%. In the second place is Greece with a much most significant number of enrollments, 197 learners and a close to average graduate rate of 12.6%. At the third place we see Angola, with 24 enrollments and a graduate rate similar to Greece at 12.5%. After that we see that the rest of the countries start to fall below the the best performing run, but still having a good overall rate.
 
 ### Conclusion
@@ -441,30 +416,103 @@ The characteristics of the learners that were the best performers in the course 
 source("src/leaving-survey-responses-eda.R", local = knitr::knit_global())
 ```
 
-To make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging all runs and producing the means of each variable I was investigating. When looking to investigate the learner engagement of the course I set out to look at the following questions for this dataset:
+To make it easier for me to get a better picture of what happend in all runs, I have taken the values below by merging runs 4 to 7 and producing the means of each variable I was investigating. This was done because of the differences in the previous runs and the difficulty in merging sets with different steps. When looking to investigate the learner engagement of the course I set out to look at the following questions for this dataset:
 
 -	Percentages of the leaving reasons for which learners left.
 -	Percentages of the leaving steps at which learners left.
-
-In both the leaving steps and reasons I have only used the datasets from runs 4 to 7 because of the differences in the previous runs and the difficulty in merging sets with different steps.
+ 
 
 ### Leaving Steps
 
-```{r echo=FALSE, fig.align = "center",  fig.width=11}
+```{r echo=FALSE, fig.align = "center",  fig.width=11, fig.height=3.5}
 leaving.step.merged.plot()
 ```
-
 The numbers that represent the steps are slightly modified. The hundreds represent the week and the rest of the number is the step number. The step at which by far the most students left is step 320 with more than 11 people leaving on average. This is really surprising since step 320 is the last step in the course. The second most usual one is 113 and then 119 which are in the middle and at the end of week 1 respectively.
 
 ### Leaving Reasons
 
-```{r echo=FALSE, fig.align = "center", fig.width=11, fig.height=5}
+```{r echo=FALSE, fig.align = "center", fig.width=11, fig.height=3}
 leaving.reason.merged.plot()
 ```
-
 When we look at the leaving reasons it is clear that most people either mentioned that they don't have enough time or that the course required more time that they thought, which both are very similar since they are both referring to time limitations. Therefore it is safe to say that the course would benefit by being faster. To further inspect just how much time the course it taking students, I will next look at the step activity dataset which hold information about the duration of each step.
 
 ## Step Activity dataset
 ```{r include=FALSE}
 source("src/step-activity-eda.R", local = knitr::knit_global())
 ```
+
+For the steps activity dataset I have used a merged version of runs 3 to 7 as they were the only ones with the same steps. This was again done because of the differences in the previous runs and the difficulty in merging sets with different steps. I have also performed some analysis across the runs to look at the differences between them. The main data mining goals for this dataset encompassed the following questions that concern Learner Engagement:
+
+-	Percentage of learners that completed each step
+-	The time it took to complete each step
+- The difference of both across the runs
+
+### Step engagement and time to complete
+
+```{r echo=FALSE, fig.align = "center", fig.width=15, fig.height=6}
+get.merged.step.data.plot(step.success.data.merged)
+```
+The plot above shows us three different things. First is the number of people that started each step and those that completed it. Here we see that as the steps progressed, less and less people were covering them. The second figure show a more clear view of the percentage of what is shown in the first one, the percentage of people that completed each step. This essentially gives us a value that shows how engaging each step was, because if a learner gave up midway it means that something was wrong with the step. It could be that was too hard to understand, too long or simply boring, among other things. In the second plot we observe that overall the steps in the beginning and those in the ends were the ones where most people were giving up. Although we have to mention that the difference in engagement in these steps is not huge. Lastly, we can see the third figure which shows the time on average that it took students to complete each step. In this plot, most of the steps have relatively similar values, except for a few that really stand out. Steps 318, 101, 109 and 104 have significantly higher values in term of the time it took student to complete them. When we compare these steps with the second figure we can also see that the engagement levels were also lower. This would indicate that when a step takes too long to finish it leads students to give up on it more easily.
+
+### Step engagement and time to complete (runs 3 - 7)
+```{r echo=FALSE , fig.width=15, fig.height=6}
+get.step.success.data.allruns.plot(step.success.data.allruns)
+```
+Another interesting observation I have made during my analysis is that when we check these same metrics across multiple runs we see that run 6 has some significantly outlying values for step 104. When looking into this step, I found that it was an exercise which could mean that this exercise was altered in run 6 and caused some problems.
+
+## Weekly Sentiment dataset
+```{r include=FALSE}
+source("src/weekly-sentiment-eda.R", local = knitr::knit_global())
+```
+
+Not a lot of data was available for this dataset so I decided to use only run 6 for my analysis. My data mining goal for this dataset was to investigate the following question about Learner Engagement:
+
+- How well was the course received by the learners?
+
+The way I decided to approach my analysis was by investigating the text reason that the students gave. To analyse qualitative data I manipulated the data in such a way that allowed me to see the most frequent words from the responses in the form of a "wordcloud".
+
+```{r echo=FALSE , fig.width=11, fig.height=4, warning=FALSE}
+wordcloud.run6()
+```
+After removing a few stopwords that do not give real meaning, the remaining word could seems to show a positive sentiment. Learners have been giving nice adjectives and comments about the course.
+
+## Question response dataset
+```{r include=FALSE}
+source("src/questions-eda.R", local = knitr::knit_global())
+```
+
+For the question response dataset I have checked the percentage of correct answers given to investigate the difficulty of each quiz for runs 2 to 7. The cross-run analysis showed that the runs had similar results. The primary goals of my analysis was to answer the following questions that concern the Learner Performance:
+
+-	Success rate for every quiz.
+- Success rate based on the number of questions 
+
+```{r echo=FALSE , fig.width=11, fig.height=2.8}
+quiz.merged.plot()
+```
+The most successful quizzes seem 220 and 108, which had 80% and 65% of their responses correct. Whereas the the quizzes 311 and 316 which are both in Week 3 have very low success rates. This could be an indication that the material covers before the successful quizes was better understood by the learner, in contrast to that of week 3.
+
+```{r echo=FALSE , fig.width=11, fig.height=3.5}
+quiz.question.num.plot()
+```
+When investigating the the success percentage according to the number of questions a quiz had, we observe that there seems to be a relationships that indicates that the more questions a quiz has, the less the success percentage. Although, it is worth mentioning that the points lay quite far from our trend line, therefore the relationship is not that strong.
+
+## Video Stats dataset
+```{r include=FALSE}
+source("src/video-stats-eda.R", local = knitr::knit_global())
+```
+
+To make my analysis more reliable, I have merges the runs 3 to 7 into one averaged one. As per my data mining goals I had decided to investigate the learner engagement from the video statistics dataset by looking at the following question:
+
+-	Percentage of video watched according to their duration.
+
+```{r echo=FALSE , fig.width=11, fig.height=3.5}
+video.duration.plot()
+```
+As we can see from the plot above, there is a clear correlation between the duration of the videos and the percentage of people who watched the whole thing. This relationship shows us that the longer the video is, the more the chances that a learner will stop watching.
+
+---
+
+### Conclusion
+
+With the analysis of the data sets now complete we have come to the end of this project. Through the data understanding, preparation and analysis I have managed to extract some really useful insights about the Future Learn Cyber Security Course. The business goals which I had originally set out as the framework of my work have now been fully satisfied. Information has been produced to answer questions from 6 out of the 8 different types of dataset, for a wide selection of runs. The data mining goals of Investigating how and why the learners engagement and performance was attributed has been a complete success. Furthermore, a thorough investigation into the background characteristics and the effect has provided us with eye-opening results about the target audience of this company.
+
