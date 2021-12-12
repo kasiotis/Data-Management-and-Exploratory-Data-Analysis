@@ -18,9 +18,13 @@ Once that's done, you can execute any of the analysis filese in the `src`
 directory. Before running any of the analysis files please make sure to
 call the function called load.project().
 
-Additionally, in orderd for the pre-processing to work you may need to
+Additionally, in order for the pre-processing to work you may need to
 install some packages that were used. To do that, you can go into these files
 in the `munge` folder from were you can see all the libraries that get imported.
 To install these libraries please use the `install.packages('LibraryName')` 
 function along with the name of the libraries you do not currently have
 already installed on your device.
+
+To run the analysis you would simply go to the `src` folder and call
+each of the functions I created for the analysis. They all have comments
+so you can easily find what you are looking for.

@@ -1,0 +1,257 @@
+commit 2aa7fe83fae89bc0f4535ba8056e21a8ba4c81f7
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Fri Dec 10 01:43:37 2021 +0000
+
+    final touches on the report and creation of read me file with instructions
+
+commit cf4b5643fb488d131fc7a0d10231b70c84162736
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Fri Dec 10 00:47:17 2021 +0000
+
+    made some final minor cosmetic changes to the analysis of question responses, step activity, video stats and weekly sentiment. Also finished with the report
+
+commit aead8bbc733f0926c06a2746af57e5d2699b1370
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Thu Dec 9 21:44:16 2021 +0000
+
+    made some minor changes to the preprocessing of the leaving survey responses datase and then wrote about its analysis in the report
+
+commit a352f4e63c8f12b8471dabf6d26d4728a0c97f2f
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Thu Dec 9 19:52:51 2021 +0000
+
+    changed some of the country analysis for enrollments and wrote the whole chapeter of analysis on enrollments
+
+commit e177aad045cd1859033b6cc701f2d06b28bc54c6
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Thu Dec 9 17:14:36 2021 +0000
+
+    Did some changes to the preprocessing of enrolments and started writting about my analysis in the report
+
+commit c67dbda51254622193e11433d6e859d1c55c51b8
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Thu Dec 9 12:14:11 2021 +0000
+
+    cleaning and adding comments for all my analysis files
+
+commit ed266d43aa3e9cdd542c1e841cd3bee07bd1128e
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Thu Dec 9 11:13:11 2021 +0000
+
+    Changed and added comments for all my preprocessing files
+
+commit f3b5e2f1393b64e0b03350caded73cb6939f516d
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 19:10:18 2021 +0000
+
+    moved my dataset merging and combining code for the video duration analysis, from src to munge
+
+commit f68e02bdb1134affd68b3053b20a23cdefb3e831
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 18:00:29 2021 +0000
+
+    did some cross-run analysis on my leaving steps and reasons sets
+
+commit 36f39dcce3af04da5f2cbfc8702b4c61b9a0da36
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 17:25:11 2021 +0000
+
+    moved my dataset merging and combining code for the leaving step and reason analysis, from src to munge
+
+commit 8cc1453c09e388b25d7d1b824965385dac61269e
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 16:33:58 2021 +0000
+
+    final patching up for question response
+
+commit 4fc646155e76ffab3de1721f646c3f47465dd4a8
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 16:26:35 2021 +0000
+
+    cross-run analysis for the success percentage of the quizzes from the question response set
+
+commit 6ca947bb5673b67afa32c4c229be7081a9b1548f
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 15:42:04 2021 +0000
+
+    moved my dataset merging and combining code for the quizz data analysis, from src to munge
+
+commit 0cc464cb76fcde5bb9410fe5bf902458eb3c9494
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 15:35:11 2021 +0000
+
+    cross-run analysis for graduate percentage of the background education, employment and gender of learners
+
+commit c343c6402b19266b9b486606ac51f002ab3b337f
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 15:00:15 2021 +0000
+
+    cross-run analysis for graduate percentage of the countries of origin of learners
+
+commit c64ef0f6446717cc1cfe5553d5b4d33a8e9c48cb
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 13:45:52 2021 +0000
+
+    cross-run analysis for graduate percentage of age ranges
+
+commit ff6c7dca16592675deaec42f071e7625607c592a
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 13:25:38 2021 +0000
+
+    moved my dataset merging and combining code for gender-enrolment graduate analysis, from src to munge
+
+commit aa81748d10053f295ad6278a3e13cd96995e34da
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 13:19:40 2021 +0000
+
+    moved my dataset merging and combining code for employment-enrolment graduate analysis, from src to munge
+
+commit 12b228a97603aef50b97f51634d695a5ccd2d81f
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 13:09:41 2021 +0000
+
+    moved my dataset merging and combining code for previous-education-enrolment graduate analysis, from src to munge
+
+commit 25ed313e265d9f1b225762cb65c035580249b8da
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 12:45:17 2021 +0000
+
+    moved my dataset merging and combining code for age country-enrolment graduate analysis, from src to munge
+
+commit 74d956577b2265d98190bac900f3f89d31ff8a32
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Wed Dec 8 12:32:50 2021 +0000
+
+    moved my dataset merging and combining code for age range enrolment graduate analysis, from src to munge
+
+commit bfbfa568121094bb4611b4df1a5a4c62dd5fb5f2
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 21:07:02 2021 +0000
+
+    moved my dataset merging and combining code for step-activity from src to munge
+
+commit bef1e5215c22f51b72fe40b8ac7de26fbd0e40b2
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 20:56:47 2021 +0000
+
+    changed the preprocessing function of the step activity dataset so that it also records the run of each new dataset. I also used that data in my analysis to create two cross-run plots
+
+commit c2cdb5cc57863f2dc55323574c54c6d2a443a4fb
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 19:25:08 2021 +0000
+
+    merged my step success datasets to get the average estimes across all runs
+
+commit 625336be3da69c5db6f57efc3237da8fa130f77d
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 18:01:28 2021 +0000
+
+    merged my quiz success data sets for runs 2-7 (run 1 was excluded because the quizes were different from the rest) so that the analysis of the quizzes is clearer
+
+commit f79c918b822e3228de49608b829759defac2c4a9
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 17:41:01 2021 +0000
+
+    Did the analysis for the leaving survey responses and made a small change to a plot in the analysis of questions response
+
+commit fec36e4e8ea4790cb909994b1b9755c3d0ae3c6b
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 15:57:49 2021 +0000
+
+    did the analysis for the video stats data sets and made some small changes to the data understanding chapter in the report
+
+commit 3bb6a1923a6af4fc17e12a2c45c51d45cdd31a41
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Dec 7 15:18:43 2021 +0000
+
+    did the analysis for the step activity data sets
+
+commit bf7353300fa961af5491b055047ca09da1e886ef
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 18:50:32 2021 +0000
+
+    did analysis for weekly sentiment survey and fixed a couple of things in the question response preprocessing
+
+commit 83490730186fbbb66b0cc2b303bd736ccb4d0053
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 18:42:50 2021 +0000
+
+    did some analysis for the question response datasets
+
+commit 5b9c36adaebf089d8f06fdb713f319f3572732b1
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 18:02:19 2021 +0000
+
+    started analysis on question response and made a change to its preprocessing so that the returned datasets are ordered based on the step
+
+commit b023928c614070cd3350314186e42089a207ecf5
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 17:02:10 2021 +0000
+
+    made some changes to the age range analysis for the enrolments data set
+
+commit 09c3dfa255b3878ccb64f70e61afc2f666b7b2c7
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 16:44:21 2021 +0000
+
+    orderd the factor levels of age ranges from the enrollments preprocessing. Also arried out the analysis for all the enrollments data mining goals
+
+commit ce7dab5ef761623bbaba8f7dfd1b61314c3fbf1c
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Mon Dec 6 11:16:45 2021 +0000
+
+    creating the munge file for the preprocessing of the Leaving Survey Responses data set and writting about it in the Data Preparations section of the RMarkdown report
+
+commit 9ec095d72c48b6923b24d40eaba735fcf74cbb8a
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sun Dec 5 22:21:17 2021 +0000
+
+    creating the munge file for the preprocessing of the Step Activity data set and writting about it in the Data Preparations section of the RMarkdown report
+
+commit 90e364831a1a04580ee799e38ef04d8095e26d7a
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sat Dec 4 18:05:02 2021 +0000
+
+    writting about the data preparation section of the video stats data set in the RMarkdown Report
+
+commit 2c829ad8959c96d7829041de8136cd9b104bfdac
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sat Dec 4 16:42:30 2021 +0000
+
+    creating the munge file for the preprocessing of the Weekly Sentiment survey  data set and writting about it in the Data Preparations section of the RMarkdown report
+
+commit afae202e2ae49946e023864fb6f2d7978efb6076
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sat Dec 4 14:23:00 2021 +0000
+
+    creating the munge file for the preprocessing of the Question Response data set and writting about it in the Data Preparations section of the RMarkdown report
+
+commit a1d05f335423254ab43469bf5057bb8924ff7245
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sat Dec 4 13:22:28 2021 +0000
+
+    creating the munge file for the preprocessing of the enrolments data set and writting the about it in the Data Preparations section of the RMarkdown report
+
+commit da63842bdd30344b160194fc3c0b2e6e5036c8dc
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Nov 30 21:01:04 2021 +0000
+
+    wrote Data Understanding chapter in the rMarkdown report
+
+commit 53536ab7d5d917921dc3909a7d7d028022a3b09e
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Tue Nov 30 18:54:18 2021 +0000
+
+    Removed placeholder files of the template and wrote Business Understanding chapter in my Rmarkdown report
+
+commit 51cb3ff6288dd75dea448ad552d998c40b148d14
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sun Nov 7 16:57:33 2021 +0000
+
+    Imported data and set up Markdown report
+
+commit b7219082b53adf46d230cf196f9331a1e621118f
+Author: Antreas Kasiotis <kasiotisandreas@gmail.com>
+Date:   Sun Nov 7 16:41:12 2021 +0000
+
+    Set up Project

@@ -1,8 +1,4 @@
-library(wordcloud)
-library(RColorBrewer)
-library(wordcloud2)
-library(tm)
-library(tidytext)
+
 
 
 get.weekly.sentiment.plot = function(weekly.sentiment.dataset) {
