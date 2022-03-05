@@ -28,3 +28,6 @@ already installed on your device.
 To run the analysis you would simply go to the `src` folder and call
 each of the functions I created for the analysis. They all have comments
 so you can easily find what you are looking for.
+
+To view the report detailing the process and findings of this project, 
+please go into the `reports` folder and open the PDF document there.
